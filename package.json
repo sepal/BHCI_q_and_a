@@ -1,5 +1,10 @@
 {
   "name": "BHCI_q_and_a",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "babel": "^5.6.7",
+    "browserify": "^10.2.4",
+    "react": "^0.13.3"
+  }
 }
