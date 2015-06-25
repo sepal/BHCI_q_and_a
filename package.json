@@ -2,9 +2,14 @@
   "name": "BHCI_q_and_a",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "build-js": "browserify ./src/js/app.js -t babelify --outfile ./dist/js/app.js"
+  },
   "dependencies": {
-    "babel": "^5.6.7",
+  },
+  "devDependencies": {
     "browserify": "^10.2.4",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "babelify": "^6.1.2"
   }
 }
