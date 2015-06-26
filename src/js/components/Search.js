@@ -1,5 +1,7 @@
 import React from 'react';
 import Rx from 'rx-react';
+import _ from 'lodash';
+
 import SearchResult from './SearchResult';
 
 var Search = React.createClass({
@@ -59,7 +61,7 @@ var Search = React.createClass({
         }
       });
 
-      let slides = _.filter(this.state.questions, (slide) => {
+      let slides = _.filter(this.state.slides, (slide) => {
         var re = new RegExp(val,"gi");
         // Simulate a fulltext search.
         if (slide.topic.match(re) || slide.body.match(re)) {

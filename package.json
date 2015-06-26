@@ -7,7 +7,7 @@
     "watch-js": "nodemon -e js -w ./src/js -x 'npm run build-js'",
     "build-sass": "node-sass ./src/sass/styles.scss | postcss -u autoprefixer -o ./dist/css/styles.css",
     "watch-sass": "nodemon -e scss -w ./src/sass -x 'npm run build-sass'",
-    "watch": "npm run watch-js & npm run watch-sass"
+    "watch": "npm run watch-js && npm run watch-sass"
   },
   "dependencies": {
   },

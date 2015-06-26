@@ -6,7 +6,6 @@ import SlideTeaser from './SlideTeaser';
 class SearchSlides extends React.Component {
   render() {
     var elements = [];
-    console.log(this.props.slides);
     if (this.props.slides.length > 0) {
       _.each(this.props.slides, (slide) => {
         elements.push(<SlideTeaser {...slide} key={slide.id} />);
