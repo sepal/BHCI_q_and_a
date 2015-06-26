@@ -1,6 +1,8 @@
 import React from 'react';
 import Bootstrap from 'react-bootstrap'
 
+import SearchQuestions from './SearchQuestions';
+
 var TabbedArea = Bootstrap.TabbedArea;
 var TabPane = Bootstrap.TabPane;
 
@@ -13,7 +15,9 @@ class SearchResult extends React.Component {
     return (
       <div className={classes}>
         <TabbedArea defaultActiveKey={1}>
-          <TabPane eventKey={1} tab='Questions'>Questions</TabPane>
+          <TabPane eventKey={1} tab='Questions'>
+            <SearchQuestions questions={this.props.results.questions} />
+          </TabPane>
           <TabPane eventKey={2} tab='Slides'>Slides</TabPane>
         </TabbedArea>
       </div>
