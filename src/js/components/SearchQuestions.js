@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import QuestionTeaser from 'QuestionTeaser';
+import QuestionTeaser from './QuestionTeaser';
 
 class SearchQuestions extends React.Component {
   render() {
