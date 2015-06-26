@@ -1,5 +1,14 @@
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 .container-width {
   max-width: 1200px;
+}
+
+
+
+.search--main {
+  max-width: 600px;
+  margin: 0 auto;
 }

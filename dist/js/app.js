@@ -19840,33 +19840,33 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var Slide = (function (_React$Component) {
-  function Slide() {
-    _classCallCheck(this, Slide);
+var Search = (function (_React$Component) {
+  function Search() {
+    _classCallCheck(this, Search);
 
-    _get(Object.getPrototypeOf(Slide.prototype), "constructor", this).apply(this, arguments);
+    _get(Object.getPrototypeOf(Search.prototype), "constructor", this).apply(this, arguments);
   }
 
-  _inherits(Slide, _React$Component);
+  _inherits(Search, _React$Component);
 
-  _createClass(Slide, [{
+  _createClass(Search, [{
     key: "render",
     value: function render() {
       return _react2["default"].createElement(
         "div",
-        { className: "search" },
+        { className: "search--main" },
         _react2["default"].createElement(
           "div",
-          { "class": "input-group col-md-12" },
-          _react2["default"].createElement("input", { type: "text", "class": "form-control input-lg",
+          { className: "input-group col-md-12" },
+          _react2["default"].createElement("input", { type: "text", className: "form-control input-lg",
             placeholder: "Search questions or slides..." }),
           _react2["default"].createElement(
             "span",
-            { "class": "input-group-btn" },
+            { className: "input-group-btn" },
             _react2["default"].createElement(
               "button",
-              { "class": "btn btn-info btn-lg", type: "button" },
-              _react2["default"].createElement("i", { "class": "glyphicon glyphicon-search" })
+              { className: "btn btn-info btn-lg", type: "button" },
+              _react2["default"].createElement("i", { className: "glyphicon glyphicon-search" })
             )
           )
         )
@@ -19874,9 +19874,9 @@ var Slide = (function (_React$Component) {
     }
   }]);
 
-  return Slide;
+  return Search;
 })(_react2["default"].Component);
 
-module.exports = Slide;
+module.exports = Search;
 
 },{"react":156}]},{},[157]);

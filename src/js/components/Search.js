@@ -1,15 +1,15 @@
 import React from 'react';
 
-class Slide extends React.Component {
+class Search extends React.Component {
   render() {
     return (
-      <div className="search">
-        <div class="input-group col-md-12">
-          <input type="text" class="form-control input-lg"
+      <div className="search--main">
+        <div className="input-group col-md-12">
+          <input type="text" className="form-control input-lg"
                  placeholder="Search questions or slides..."/>
-          <span class="input-group-btn">
-              <button class="btn btn-info btn-lg" type="button">
-                <i class="glyphicon glyphicon-search"></i>
+          <span className="input-group-btn">
+              <button className="btn btn-info btn-lg" type="button">
+                <i className="glyphicon glyphicon-search"></i>
               </button>
           </span>
         </div>
@@ -18,4 +18,4 @@ class Slide extends React.Component {
   }
 }
 
-module.exports = Slide;
+module.exports = Search;
