@@ -2,19 +2,44 @@ import React from 'react';
 import Rx from 'rx-react';
 import SearchResult from './SearchResult';
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
+var Search = React.createClass({
+  mixins: [Rx.RxLifecycleMixin],
+  getInitialState: function () {
+    return {
+      search: "",
+      questions: [],
+      slides: [],
+      questions_filtered: [],
+      slides_filtered: []
+    };
+  },
+  componentWillMount: function () {
+    $.ajax({
+      url: "data/questions.json"
+    }).done((data) => {
+      this.setState({
+        questions: data,
+        questions_filtered: data
+      });
+    });
+    $.ajax({
+      url: "data/slides.json"
+    }).done((data) => {
+      this.setState({
+        slides: data,
+        slides_filtered: data
+      });
+    });
     var setState = this.setState.bind(this);
 
-    var searchClick = Rx.EventHandler.create();
-    searchClick
-      .subscribe(this.handleSearch);
+    var searchClick = Rx.FuncSubject.create();
+    searchClick.subscribe(this.submitSearch);
 
-    var searchChanged = Rx.EventHandler.create();
+    var searchChanged = Rx.FuncSubject.create();
     searchChanged.map((e) => {
-      this.state.search = e.target.value;
-      return this.state;
+      return {
+        search: e.target.value
+      };
     })
       .subscribe(setState);
 
@@ -22,21 +47,38 @@ class Search extends React.Component {
       searchClick: searchClick,
       searchChanged: searchChanged
     };
+  },
+  submitSearch(event) {
+    let val = this.state.search.trim();
+    if (val) {
+      let questions = _.filter(this.state.questions, (question) => {
+        var re = new RegExp(val,"gi");
+        // Simulate a fulltext search.
+        if (question.title.match(re) || question.body.match(re) || question.author.match(re)) {
+          return question;
+        }
+      });
 
-    this.state = {
-      search: "",
-      results: {
-        questions: [],
-        answers: []
-      }
-    };
-  }
+      let slides = _.filter(this.state.questions, (slide) => {
+        var re = new RegExp(val,"gi");
+        // Simulate a fulltext search.
+        if (slide.topic.match(re) || slide.body.match(re)) {
+          return slide;
+        }
+      });
 
-  handleSearch(event) {
-    console.log(this.state.search);
-  }
-
-  render() {
+      this.setState({
+        questions_filtered: questions,
+        slides_filtered: slides
+      });
+    } else if (val == "") {
+      this.setState({
+        questions_filtered: this.state.questions,
+        slides_filtered: this.state.slides
+      });
+    }
+  },
+  render: function () {
     return (
       <div className="search search--main top30">
         <div className="input-group col-md-12">
@@ -51,12 +93,11 @@ class Search extends React.Component {
           </span>
         </div>
 
-        <SearchResult className="top30" term={this.state.term}
-                      results={this.state.results}/>
+        <SearchResult className="top30" questions={this.state.questions_filtered} slides={this.state.slides_filtered}/>
       </div>
 
     );
   }
-}
+});
 
 module.exports = Search;

@@ -8,7 +8,7 @@ class QuestionTeaser extends React.Component {
           {this.props.title}
         </div>
         <div className="question__stats">
-          {this.props.stats}
+          {this.props.answers.length}
         </div>
       </div>
     )
