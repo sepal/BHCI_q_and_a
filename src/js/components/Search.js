@@ -4,6 +4,8 @@ import _ from 'lodash';
 
 import SearchResult from './SearchResult';
 
+const ENTER_KEY = 13;
+
 var Search = React.createClass({
   mixins: [Rx.RxLifecycleMixin],
   getInitialState: function () {
@@ -37,24 +39,33 @@ var Search = React.createClass({
     var searchClick = Rx.FuncSubject.create();
     searchClick.subscribe(this.submitSearch);
 
+    var searchKeyDown = Rx.FuncSubject.create();
+    searchKeyDown
+      .filter((event) => {
+        return event.keyCode === ENTER_KEY;
+      })
+      .subscribe(this.submitSearch);
+
     var searchChanged = Rx.FuncSubject.create();
-    searchChanged.map((e) => {
-      return {
-        search: e.target.value
-      };
-    })
+    searchChanged
+      .map((e) => {
+        return {
+          search: e.target.value
+        };
+      })
       .subscribe(setState);
 
     this.handlers = {
       searchClick: searchClick,
-      searchChanged: searchChanged
+      searchChanged: searchChanged,
+      searchKeyDown: searchKeyDown
     };
   },
   submitSearch(event) {
     let val = this.state.search.trim();
     if (val) {
       let questions = _.filter(this.state.questions, (question) => {
-        var re = new RegExp(val,"gi");
+        var re = new RegExp(val, "gi");
         // Simulate a fulltext search.
         if (question.title.match(re) || question.body.match(re) || question.author.match(re)) {
           return question;
@@ -62,7 +73,7 @@ var Search = React.createClass({
       });
 
       let slides = _.filter(this.state.slides, (slide) => {
-        var re = new RegExp(val,"gi");
+        var re = new RegExp(val, "gi");
         // Simulate a fulltext search.
         if (slide.topic.match(re) || slide.body.match(re)) {
           return slide;
@@ -86,6 +97,7 @@ var Search = React.createClass({
         <div className="input-group col-md-12">
           <input type="text" className="form-control input-lg"
                  onChange={this.handlers.searchChanged}
+                 onKeyDown={this.handlers.searchKeyDown}
                  placeholder="Search questions or slides..."/>
           <span className="input-group-btn">
               <button className="btn btn-info btn-lg" type="button"
@@ -95,7 +107,9 @@ var Search = React.createClass({
           </span>
         </div>
 
-        <SearchResult className="top30" questions={this.state.questions_filtered} slides={this.state.slides_filtered}/>
+        <SearchResult className="top30"
+                      questions={this.state.questions_filtered}
+                      slides={this.state.slides_filtered}/>
       </div>
 
     );

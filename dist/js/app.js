@@ -38754,6 +38754,8 @@ var _SearchResult = require('./SearchResult');
 
 var _SearchResult2 = _interopRequireDefault(_SearchResult);
 
+var ENTER_KEY = 13;
+
 var Search = _react2['default'].createClass({
   displayName: 'Search',
 
@@ -38791,6 +38793,11 @@ var Search = _react2['default'].createClass({
     var searchClick = _rxReact2['default'].FuncSubject.create();
     searchClick.subscribe(this.submitSearch);
 
+    var searchKeyDown = _rxReact2['default'].FuncSubject.create();
+    searchKeyDown.filter(function (event) {
+      return event.keyCode === ENTER_KEY;
+    }).subscribe(this.submitSearch);
+
     var searchChanged = _rxReact2['default'].FuncSubject.create();
     searchChanged.map(function (e) {
       return {
@@ -38800,7 +38807,8 @@ var Search = _react2['default'].createClass({
 
     this.handlers = {
       searchClick: searchClick,
-      searchChanged: searchChanged
+      searchChanged: searchChanged,
+      searchKeyDown: searchKeyDown
     };
   },
   submitSearch: function submitSearch(event) {
@@ -38842,6 +38850,7 @@ var Search = _react2['default'].createClass({
         { className: 'input-group col-md-12' },
         _react2['default'].createElement('input', { type: 'text', className: 'form-control input-lg',
           onChange: this.handlers.searchChanged,
+          onKeyDown: this.handlers.searchKeyDown,
           placeholder: 'Search questions or slides...' }),
         _react2['default'].createElement(
           'span',
@@ -38854,7 +38863,9 @@ var Search = _react2['default'].createClass({
           )
         )
       ),
-      _react2['default'].createElement(_SearchResult2['default'], { className: 'top30', questions: this.state.questions_filtered, slides: this.state.slides_filtered })
+      _react2['default'].createElement(_SearchResult2['default'], { className: 'top30',
+        questions: this.state.questions_filtered,
+        slides: this.state.slides_filtered })
     );
   }
 });
