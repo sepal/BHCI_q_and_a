@@ -55,7 +55,8 @@ var Slide = React.createClass({
                   aria-hidden="true"></span>
           </a>
         </div>
-        <div className="Questions">
+        <div className="question top30">
+          <button className="btn btn-primary pull-right"><span className="glyphicon glyphicon-plus"></span> Add question</button>
           <h2>Questions</h2>
           <QuestionList questions={questions}/>
         </div>

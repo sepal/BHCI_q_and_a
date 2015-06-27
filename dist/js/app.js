@@ -39254,7 +39254,13 @@ var Slide = _react2['default'].createClass({
       ),
       _react2['default'].createElement(
         'div',
-        { className: 'Questions' },
+        { className: 'question top30' },
+        _react2['default'].createElement(
+          'button',
+          { className: 'btn btn-primary pull-right' },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-plus' }),
+          ' Add question'
+        ),
         _react2['default'].createElement(
           'h2',
           null,
