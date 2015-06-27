@@ -41,6 +41,7 @@ var Slide = React.createClass({
 
     return (
       <div className="slide container">
+        <h1>{this.props.topic}</h1>
         <div className="slide__show container">
           <a href="javascript:void(0)" className="col-md-1 slide__controller"
              onClick={this.handlers.prevClick}>

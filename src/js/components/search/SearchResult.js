@@ -17,10 +17,11 @@ class SearchResult extends React.Component {
       <div className={classes}>
         <TabbedArea defaultActiveKey={1}>
           <TabPane eventKey={1} tab='Questions'>
-            <QuestionList questions={this.props.questions} />
+            <QuestionList questions={this.props.questions}/>
           </TabPane>
           <TabPane eventKey={2} tab='Slides'>
-            <SlideList slides={this.props.slides} />
+            <SlideList slides={this.props.slides}
+                       onSetSlide={this.props.onSetSlide}/>
           </TabPane>
         </TabbedArea>
       </div>

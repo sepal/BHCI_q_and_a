@@ -38731,7 +38731,7 @@ var App = _react2['default'].createClass({
     if (this.state.page == 'search') {
       content = _react2['default'].createElement(_componentsSearchSearch2['default'], { onPageChange: this.handlePageChange,
         questions: this.state.questions,
-        slides: this.state.slides });
+        slides: this.state.slides, onSetSlide: this.setSlide });
     } else if (this.state.page == 'slides') {
       content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { onSetSlide: this.setSlide,
         slides: this.state.slides });
@@ -39090,7 +39090,8 @@ var Search = _react2['default'].createClass({
       ),
       _react2['default'].createElement(_SearchResult2['default'], { className: 'top30',
         questions: this.state.questions_filtered,
-        slides: this.state.slides_filtered })
+        slides: this.state.slides_filtered,
+        onSetSlide: this.props.onSetSlide })
     );
   }
 });
@@ -39159,7 +39160,8 @@ var SearchResult = (function (_React$Component) {
           _react2['default'].createElement(
             TabPane,
             { eventKey: 2, tab: 'Slides' },
-            _react2['default'].createElement(_slidesSlideList2['default'], { slides: this.props.slides })
+            _react2['default'].createElement(_slidesSlideList2['default'], { slides: this.props.slides,
+              onSetSlide: this.props.onSetSlide })
           )
         )
       );
@@ -39232,6 +39234,11 @@ var Slide = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { className: 'slide container' },
+      _react2['default'].createElement(
+        'h1',
+        null,
+        this.props.topic
+      ),
       _react2['default'].createElement(
         'div',
         { className: 'slide__show container' },

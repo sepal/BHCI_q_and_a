@@ -99,7 +99,8 @@ var Search = React.createClass({
 
         <SearchResult className="top30"
                       questions={this.state.questions_filtered}
-                      slides={this.state.slides_filtered}/>
+                      slides={this.state.slides_filtered}
+                      onSetSlide={this.props.onSetSlide}/>
       </div>
 
     );

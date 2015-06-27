@@ -48,7 +48,7 @@ var App = React.createClass({
     if (this.state.page == "search") {
       content = <Search onPageChange={this.handlePageChange}
                         questions={this.state.questions}
-                        slides={this.state.slides}/>
+                        slides={this.state.slides} onSetSlide={this.setSlide} />
     } else if (this.state.page == 'slides') {
       content = <Slides onSetSlide={this.setSlide}
                         slides={this.state.slides}/>
