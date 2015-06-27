@@ -5,10 +5,10 @@ class QuestionTeaser extends React.Component {
     return (
       <div className="question question--teaser">
         <div className="question__title col-md-8">
-          <h2>{this.props.title}</h2>
+          <h3>{this.props.title}</h3>
         </div>
         <div className="question__stats col-md-4">
-          <h3>{this.props.answers.length} answers</h3>
+          <h5>{this.props.answers.length} answers</h5>
         </div>
       </div>
     );

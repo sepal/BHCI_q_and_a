@@ -38659,6 +38659,8 @@ module.exports = function () {};
 },{"_process":1}],238:[function(require,module,exports){
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
@@ -38676,6 +38678,10 @@ var _componentsSearchSearch2 = _interopRequireDefault(_componentsSearchSearch);
 var _componentsSlidesSlides = require('./components/slides/Slides');
 
 var _componentsSlidesSlides2 = _interopRequireDefault(_componentsSlidesSlides);
+
+var _componentsSlidesSlide = require('./components/slides/Slide');
+
+var _componentsSlidesSlide2 = _interopRequireDefault(_componentsSlidesSlide);
 
 var App = _react2['default'].createClass({
   displayName: 'App',
@@ -38713,10 +38719,12 @@ var App = _react2['default'].createClass({
     });
   },
   setSlide: function setSlide(options) {
-    this.setState({
-      page: 'slide',
-      slide: options.slide
-    });
+    if (options.slide >= 0 && options.slide < this.state.slides.length) {
+      this.setState({
+        page: 'slide',
+        slide: options.slide
+      });
+    }
   },
   render: function render() {
     var content = null;
@@ -38728,11 +38736,8 @@ var App = _react2['default'].createClass({
       content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { onSetSlide: this.setSlide,
         slides: this.state.slides });
     } else if (this.state.page == 'slide') {
-      content = _react2['default'].createElement(
-        'div',
-        null,
-        this.state.slide
-      );
+      content = _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slides[this.state.slide], {
+        onSetSlide: this.setSlide, questions: this.state.questions }));
     }
 
     return _react2['default'].createElement(
@@ -38750,7 +38755,7 @@ var App = _react2['default'].createClass({
 
 _react2['default'].render(_react2['default'].createElement(App, null), $('#app').get(0));
 
-},{"./components/navigation/navigation":239,"./components/search/Search":242,"./components/slides/Slides":246,"react":228}],239:[function(require,module,exports){
+},{"./components/navigation/navigation":239,"./components/search/Search":242,"./components/slides/Slide":244,"./components/slides/Slides":247,"react":228}],239:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -38833,7 +38838,7 @@ var Navigation = _react2['default'].createClass({
 
 module.exports = Navigation;
 
-},{"../search/Search.js":242,"../slides/Slides":246,"react":228,"react-bootstrap":60,"rx-react":229}],240:[function(require,module,exports){
+},{"../search/Search.js":242,"../slides/Slides":247,"react":228,"react-bootstrap":60,"rx-react":229}],240:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -38903,7 +38908,7 @@ var QuestionList = (function (_React$Component) {
 
 module.exports = QuestionList;
 
-},{"./QuestionTeaser":241,"lodash":247,"react":228}],241:[function(require,module,exports){
+},{"./QuestionTeaser":241,"lodash":248,"react":228}],241:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38939,7 +38944,7 @@ var QuestionTeaser = (function (_React$Component) {
           "div",
           { className: "question__title col-md-8" },
           _react2["default"].createElement(
-            "h2",
+            "h3",
             null,
             this.props.title
           )
@@ -38948,7 +38953,7 @@ var QuestionTeaser = (function (_React$Component) {
           "div",
           { className: "question__stats col-md-4" },
           _react2["default"].createElement(
-            "h3",
+            "h5",
             null,
             this.props.answers.length,
             " answers"
@@ -39092,7 +39097,7 @@ var Search = _react2['default'].createClass({
 
 module.exports = Search;
 
-},{"./SearchResult":243,"lodash":247,"react":228,"rx-react":229}],243:[function(require,module,exports){
+},{"./SearchResult":243,"lodash":248,"react":228,"rx-react":229}],243:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39166,7 +39171,104 @@ var SearchResult = (function (_React$Component) {
 
 module.exports = SearchResult;
 
-},{"./../questions/QuestionList":240,"./../slides/SlideList":244,"react":228,"react-bootstrap":60}],244:[function(require,module,exports){
+},{"./../questions/QuestionList":240,"./../slides/SlideList":245,"react":228,"react-bootstrap":60}],244:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _rxReact = require('rx-react');
+
+var _rxReact2 = _interopRequireDefault(_rxReact);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _questionsQuestionList = require('../questions/QuestionList');
+
+var _questionsQuestionList2 = _interopRequireDefault(_questionsQuestionList);
+
+var Slide = _react2['default'].createClass({
+  displayName: 'Slide',
+
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    var prevClick = _rxReact2['default'].FuncSubject.create();
+    prevClick.map(function (event) {
+      return {
+        slide: _this.props.id - 1,
+        parent: _this.props.parent
+      };
+    }).subscribe(this.props.onSetSlide);
+
+    var nextClick = _rxReact2['default'].FuncSubject.create();
+    nextClick.map(function (event) {
+      return {
+        slide: _this.props.id + 1,
+        parent: _this.props.parent
+      };
+    }).subscribe(this.props.onSetSlide);
+    this.handlers = {
+      prevClick: prevClick,
+      nextClick: nextClick
+    };
+  },
+  render: function render() {
+    var _this2 = this;
+
+    var img_path = 'data/slides/full/' + this.props.filename;
+
+    var questions = _lodash2['default'].filter(this.props.questions, function (question) {
+      if (question.topic == _this2.props.topic) {
+        return question;
+      }
+    });
+
+    return _react2['default'].createElement(
+      'div',
+      { className: 'slide container' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'slide__show container' },
+        _react2['default'].createElement(
+          'a',
+          { href: 'javascript:void(0)', className: 'col-md-1 slide__controller',
+            onClick: this.handlers.prevClick },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-left',
+            'aria-hidden': 'true' })
+        ),
+        _react2['default'].createElement('img', { src: img_path, className: 'col-md-10' }),
+        _react2['default'].createElement(
+          'a',
+          { href: 'javascript:void(0)',
+            className: 'col-md-1 text-right slide__controller',
+            onClick: this.handlers.nextClick },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-right',
+            'aria-hidden': 'true' })
+        )
+      ),
+      _react2['default'].createElement(
+        'div',
+        { className: 'Questions' },
+        _react2['default'].createElement(
+          'h2',
+          null,
+          'Questions'
+        ),
+        _react2['default'].createElement(_questionsQuestionList2['default'], { questions: questions })
+      )
+    );
+  }
+});
+
+module.exports = Slide;
+
+},{"../questions/QuestionList":240,"lodash":248,"react":228,"rx-react":229}],245:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -39237,7 +39339,7 @@ var SlideList = (function (_React$Component) {
 
 module.exports = SlideList;
 
-},{"./SlideTeaser":245,"lodash":247,"react":228}],245:[function(require,module,exports){
+},{"./SlideTeaser":246,"lodash":248,"react":228}],246:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39303,7 +39405,7 @@ var SlideTeaser = (function (_React$Component) {
 
 module.exports = SlideTeaser;
 
-},{"react":228,"rx-react":229}],246:[function(require,module,exports){
+},{"react":228,"rx-react":229}],247:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39377,7 +39479,7 @@ var Slides = _react2['default'].createClass({
 
 module.exports = Slides;
 
-},{"./SlideList":244,"lodash":247,"react":228}],247:[function(require,module,exports){
+},{"./SlideList":245,"lodash":248,"react":228}],248:[function(require,module,exports){
 (function (global){
 /**
  * @license

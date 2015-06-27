@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './components/navigation/navigation';
 import Search from './components/search/Search';
 import Slides from './components/slides/Slides';
+import Slide from './components/slides/Slide';
 
 var App = React.createClass({
   getInitialState: function () {
@@ -35,22 +36,25 @@ var App = React.createClass({
     });
   },
   setSlide: function (options) {
-    this.setState({
-      page: 'slide',
-      slide: options.slide
-    });
+    if (options.slide >= 0 && options.slide < this.state.slides.length) {
+      this.setState({
+        page: 'slide',
+        slide: options.slide
+      });
+    }
   },
   render: function () {
     var content = null;
     if (this.state.page == "search") {
       content = <Search onPageChange={this.handlePageChange}
                         questions={this.state.questions}
-                        slides={this.state.slides} />
+                        slides={this.state.slides}/>
     } else if (this.state.page == 'slides') {
       content = <Slides onSetSlide={this.setSlide}
-                        slides={this.state.slides} />
+                        slides={this.state.slides}/>
     } else if (this.state.page == 'slide') {
-      content = <div>{this.state.slide}</div>
+      content = <Slide {...this.state.slides[this.state.slide]}
+        onSetSlide={this.setSlide} questions={this.state.questions}/>;
     }
 
     return (
