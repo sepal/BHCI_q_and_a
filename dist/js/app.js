@@ -39007,6 +39007,14 @@ var Search = _react2['default'].createClass({
       searchKeyDown: searchKeyDown
     };
   },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (this.state.search == '') {
+      this.setState({
+        questions_filtered: nextProps.questions,
+        slides_filtered: nextProps.slides
+      });
+    }
+  },
   submitSearch: function submitSearch(event) {
     var val = this.state.search.trim();
     if (val) {
