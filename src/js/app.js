@@ -38,7 +38,7 @@ var App = React.createClass({
     if (this.state.page == "search") {
       content = <Search questions={this.state.questions} slides={this.state.slides} />
     } else if (this.state.page == 'slides') {
-      content = <Slides questions={this.state.questions} slides={this.state.slides} />
+      content = <Slides slides={this.state.slides} />
     }
 
     return (

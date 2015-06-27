@@ -3,14 +3,50 @@ import _ from 'lodash';
 
 import SlideList from './SlideList';
 
-class Slides extends React.Component {
-  render() {
+var Slides = React.createClass({
+  getInitialState: function() {
+    return {
+      slide_groups: []
+    }
+  },
+  componentDidMount: function() {
+    this.updateGroups(this.props.slides);
+  },
+  updateGroups: function(slides) {
+    let topics = [];
+    let groups = {};
+
+    _.forEach(slides, (slide) => {
+      if (topics.indexOf(slide.topic) == -1) {
+        topics.push(slide.topic);
+        groups[slide.topic] = {
+          topic: slide.topic,
+          slides: []
+        };
+      }
+
+      groups[slide.topic].slides.push(slide);
+    });
+    console.log(groups);
+
+    this.setState({
+      slide_groups: groups
+    });
+  },
+  render: function() {
+    var elements = [];
+    _.forEach(this.state.slide_groups, (group) => {
+      elements = <div>
+          <h2>{group.topic}</h2>
+          <SlideList slides={group.slides} />
+        </div>
+    });
     return (
       <div>
-        <SlideList />
+        {elements}
       </div>
     );
   }
-}
+});
 
 module.exports = Slides;

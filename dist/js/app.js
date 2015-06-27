@@ -38716,7 +38716,7 @@ var App = _react2['default'].createClass({
     if (this.state.page == 'search') {
       content = _react2['default'].createElement(_componentsSearchSearch2['default'], { questions: this.state.questions, slides: this.state.slides });
     } else if (this.state.page == 'slides') {
-      content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { questions: this.state.questions, slides: this.state.slides });
+      content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { slides: this.state.slides });
     }
 
     return _react2['default'].createElement(
@@ -39265,15 +39265,7 @@ module.exports = SlideTeaser;
 },{"react":228}],246:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -39287,28 +39279,59 @@ var _SlideList = require('./SlideList');
 
 var _SlideList2 = _interopRequireDefault(_SlideList);
 
-var Slides = (function (_React$Component) {
-  function Slides() {
-    _classCallCheck(this, Slides);
+var Slides = _react2['default'].createClass({
+  displayName: 'Slides',
 
-    _get(Object.getPrototypeOf(Slides.prototype), 'constructor', this).apply(this, arguments);
-  }
+  getInitialState: function getInitialState() {
+    return {
+      slide_groups: []
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    this.updateGroups(this.props.slides);
+  },
+  updateGroups: function updateGroups(slides) {
+    var topics = [];
+    var groups = {};
 
-  _inherits(Slides, _React$Component);
+    _lodash2['default'].forEach(slides, function (slide) {
+      if (topics.indexOf(slide.topic) == -1) {
+        topics.push(slide.topic);
+        groups[slide.topic] = {
+          topic: slide.topic,
+          slides: []
+        };
+      }
 
-  _createClass(Slides, [{
-    key: 'render',
-    value: function render() {
-      return _react2['default'].createElement(
+      groups[slide.topic].slides.push(slide);
+    });
+    console.log(groups);
+
+    this.setState({
+      slide_groups: groups
+    });
+  },
+  render: function render() {
+    var elements = [];
+    _lodash2['default'].forEach(this.state.slide_groups, function (group) {
+      elements = _react2['default'].createElement(
         'div',
         null,
-        _react2['default'].createElement(_SlideList2['default'], null)
+        _react2['default'].createElement(
+          'h2',
+          null,
+          group.topic
+        ),
+        _react2['default'].createElement(_SlideList2['default'], { slides: group.slides })
       );
-    }
-  }]);
-
-  return Slides;
-})(_react2['default'].Component);
+    });
+    return _react2['default'].createElement(
+      'div',
+      null,
+      elements
+    );
+  }
+});
 
 module.exports = Slides;
 
