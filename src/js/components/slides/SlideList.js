@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import SlideTeaser from './SlideTeaser';
 
-class SearchSlides extends React.Component {
+class SlideList extends React.Component {
   render() {
     var elements = [];
     if (this.props.slides.length > 0) {
@@ -22,4 +22,4 @@ class SearchSlides extends React.Component {
   }
 }
 
-module.exports = SearchSlides;
+module.exports = SlideList;

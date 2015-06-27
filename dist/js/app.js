@@ -38771,7 +38771,77 @@ var Navigation = _react2['default'].createClass({
 
 module.exports = Navigation;
 
-},{"../search/Search.js":241,"react":228,"react-bootstrap":60,"rx-react":229}],240:[function(require,module,exports){
+},{"../search/Search.js":242,"react":228,"react-bootstrap":60,"rx-react":229}],240:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _QuestionTeaser = require('./QuestionTeaser');
+
+var _QuestionTeaser2 = _interopRequireDefault(_QuestionTeaser);
+
+var QuestionList = (function (_React$Component) {
+  function QuestionList() {
+    _classCallCheck(this, QuestionList);
+
+    _get(Object.getPrototypeOf(QuestionList.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _inherits(QuestionList, _React$Component);
+
+  _createClass(QuestionList, [{
+    key: 'render',
+    value: function render() {
+      var elements = [];
+
+      if (this.props.questions.length > 0) {
+        _lodash2['default'].each(this.props.questions, function (question) {
+          elements.push(_react2['default'].createElement(_QuestionTeaser2['default'], _extends({}, question, { key: question.id })));
+        });
+      } else {
+        elements.push(_react2['default'].createElement(
+          'div',
+          { className: 'text-center' },
+          _react2['default'].createElement(
+            'h2',
+            null,
+            'No questions found.'
+          )
+        ));
+      }
+
+      return _react2['default'].createElement(
+        'div',
+        { className: 'questions' },
+        elements
+      );
+    }
+  }]);
+
+  return QuestionList;
+})(_react2['default'].Component);
+
+module.exports = QuestionList;
+
+},{"./QuestionTeaser":241,"lodash":246,"react":228}],241:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38833,7 +38903,7 @@ var QuestionTeaser = (function (_React$Component) {
 
 module.exports = QuestionTeaser;
 
-},{"react":228}],241:[function(require,module,exports){
+},{"react":228}],242:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -38972,77 +39042,7 @@ var Search = _react2['default'].createClass({
 
 module.exports = Search;
 
-},{"./SearchResult":243,"lodash":246,"react":228,"rx-react":229}],242:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _QuestionTeaser = require('./QuestionTeaser');
-
-var _QuestionTeaser2 = _interopRequireDefault(_QuestionTeaser);
-
-var SearchQuestions = (function (_React$Component) {
-  function SearchQuestions() {
-    _classCallCheck(this, SearchQuestions);
-
-    _get(Object.getPrototypeOf(SearchQuestions.prototype), 'constructor', this).apply(this, arguments);
-  }
-
-  _inherits(SearchQuestions, _React$Component);
-
-  _createClass(SearchQuestions, [{
-    key: 'render',
-    value: function render() {
-      var elements = [];
-
-      if (this.props.questions.length > 0) {
-        _lodash2['default'].each(this.props.questions, function (question) {
-          elements.push(_react2['default'].createElement(_QuestionTeaser2['default'], _extends({}, question, { key: question.id })));
-        });
-      } else {
-        elements.push(_react2['default'].createElement(
-          'div',
-          { className: 'text-center' },
-          _react2['default'].createElement(
-            'h2',
-            null,
-            'No questions found.'
-          )
-        ));
-      }
-
-      return _react2['default'].createElement(
-        'div',
-        { className: 'questions' },
-        elements
-      );
-    }
-  }]);
-
-  return SearchQuestions;
-})(_react2['default'].Component);
-
-module.exports = SearchQuestions;
-
-},{"./QuestionTeaser":240,"lodash":246,"react":228}],243:[function(require,module,exports){
+},{"./SearchResult":243,"lodash":246,"react":228,"rx-react":229}],243:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39063,13 +39063,13 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _reactBootstrap2 = _interopRequireDefault(_reactBootstrap);
 
-var _SearchQuestions = require('./SearchQuestions');
+var _questionsQuestionList = require('./../questions/QuestionList');
 
-var _SearchQuestions2 = _interopRequireDefault(_SearchQuestions);
+var _questionsQuestionList2 = _interopRequireDefault(_questionsQuestionList);
 
-var _SearchSlides = require('./SearchSlides');
+var _slidesSlideList = require('./../slides/SlideList');
 
-var _SearchSlides2 = _interopRequireDefault(_SearchSlides);
+var _slidesSlideList2 = _interopRequireDefault(_slidesSlideList);
 
 var TabbedArea = _reactBootstrap2['default'].TabbedArea;
 var TabPane = _reactBootstrap2['default'].TabPane;
@@ -39099,12 +39099,12 @@ var SearchResult = (function (_React$Component) {
           _react2['default'].createElement(
             TabPane,
             { eventKey: 1, tab: 'Questions' },
-            _react2['default'].createElement(_SearchQuestions2['default'], { questions: this.props.questions })
+            _react2['default'].createElement(_questionsQuestionList2['default'], { questions: this.props.questions })
           ),
           _react2['default'].createElement(
             TabPane,
             { eventKey: 2, tab: 'Slides' },
-            _react2['default'].createElement(_SearchSlides2['default'], { slides: this.props.slides })
+            _react2['default'].createElement(_slidesSlideList2['default'], { slides: this.props.slides })
           )
         )
       );
@@ -39116,7 +39116,7 @@ var SearchResult = (function (_React$Component) {
 
 module.exports = SearchResult;
 
-},{"./SearchQuestions":242,"./SearchSlides":244,"react":228,"react-bootstrap":60}],244:[function(require,module,exports){
+},{"./../questions/QuestionList":240,"./../slides/SlideList":244,"react":228,"react-bootstrap":60}],244:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -39143,16 +39143,16 @@ var _SlideTeaser = require('./SlideTeaser');
 
 var _SlideTeaser2 = _interopRequireDefault(_SlideTeaser);
 
-var SearchSlides = (function (_React$Component) {
-  function SearchSlides() {
-    _classCallCheck(this, SearchSlides);
+var SlideList = (function (_React$Component) {
+  function SlideList() {
+    _classCallCheck(this, SlideList);
 
-    _get(Object.getPrototypeOf(SearchSlides.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(SlideList.prototype), 'constructor', this).apply(this, arguments);
   }
 
-  _inherits(SearchSlides, _React$Component);
+  _inherits(SlideList, _React$Component);
 
-  _createClass(SearchSlides, [{
+  _createClass(SlideList, [{
     key: 'render',
     value: function render() {
       var elements = [];
@@ -39180,10 +39180,10 @@ var SearchSlides = (function (_React$Component) {
     }
   }]);
 
-  return SearchSlides;
+  return SlideList;
 })(_react2['default'].Component);
 
-module.exports = SearchSlides;
+module.exports = SlideList;
 
 },{"./SlideTeaser":245,"lodash":246,"react":228}],245:[function(require,module,exports){
 "use strict";

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import QuestionTeaser from './QuestionTeaser';
 
-class SearchQuestions extends React.Component {
+class QuestionList extends React.Component {
   render() {
     var elements = [];
 
@@ -23,4 +23,4 @@ class SearchQuestions extends React.Component {
   }
 }
 
-module.exports = SearchQuestions;
+module.exports = QuestionList;
