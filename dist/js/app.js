@@ -38713,7 +38713,10 @@ var App = _react2['default'].createClass({
     });
   },
   setSlide: function setSlide(options) {
-    console.log(options);
+    this.setState({
+      page: 'slide',
+      slide: options.slide
+    });
   },
   render: function render() {
     var content = null;
@@ -38724,8 +38727,7 @@ var App = _react2['default'].createClass({
     } else if (this.state.page == 'slides') {
       content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { onSetSlide: this.setSlide,
         slides: this.state.slides });
-    }
-    if (content == 'slide') {
+    } else if (this.state.page == 'slide') {
       content = _react2['default'].createElement(
         'div',
         null,
@@ -39344,7 +39346,6 @@ var Slides = _react2['default'].createClass({
 
       groups[slide.topic].slides.push(slide);
     });
-    console.log(groups);
 
     this.setState({
       slide_groups: groups

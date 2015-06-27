@@ -27,7 +27,6 @@ var Slides = React.createClass({
 
       groups[slide.topic].slides.push(slide);
     });
-    console.log(groups);
 
     this.setState({
       slide_groups: groups
