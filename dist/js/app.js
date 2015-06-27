@@ -39314,16 +39314,16 @@ var Slides = _react2['default'].createClass({
   render: function render() {
     var elements = [];
     _lodash2['default'].forEach(this.state.slide_groups, function (group) {
-      elements = _react2['default'].createElement(
+      elements.push(_react2['default'].createElement(
         'div',
-        null,
+        { className: 'container' },
         _react2['default'].createElement(
           'h2',
           null,
           group.topic
         ),
         _react2['default'].createElement(_SlideList2['default'], { slides: group.slides })
-      );
+      ));
     });
     return _react2['default'].createElement(
       'div',

@@ -36,10 +36,12 @@ var Slides = React.createClass({
   render: function() {
     var elements = [];
     _.forEach(this.state.slide_groups, (group) => {
-      elements = <div>
+      elements.push(
+        <div className="container">
           <h2>{group.topic}</h2>
           <SlideList slides={group.slides} />
         </div>
+      );
     });
     return (
       <div>
