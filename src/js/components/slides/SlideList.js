@@ -6,12 +6,15 @@ import SlideTeaser from './SlideTeaser';
 class SlideList extends React.Component {
   render() {
     var elements = [];
-    if (this.props.slides.length > 0) {
+    if (this.props.slides != undefined && this.props.slides.length > 0) {
       _.each(this.props.slides, (slide) => {
-        elements.push(<SlideTeaser {...slide} key={slide.id} />);
+        elements.push(<SlideTeaser {...slide} key={slide.id}/>);
       });
     } else {
-      elements.push(<div className="text-center"><h2>No slides found.</h2></div>);
+      elements.push(
+        <div className="text-center">
+          <h2>No slides found.</h2>
+        </div>);
     }
 
     return (

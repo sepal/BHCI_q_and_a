@@ -11,30 +11,12 @@ var Search = React.createClass({
   getInitialState: function () {
     return {
       search: "",
-      questions: [],
-      slides: [],
-      questions_filtered: [],
-      slides_filtered: []
+      questions_filtered: this.props.questions,
+      slides_filtered: this.props.slides
     };
   },
   componentWillMount: function () {
-    $.ajax({
-      url: "data/questions.json"
-    }).done((data) => {
-      this.setState({
-        questions: data,
-        questions_filtered: data
-      });
-    });
-    $.ajax({
-      url: "data/slides.json"
-    }).done((data) => {
-      this.setState({
-        slides: data,
-        slides_filtered: data
-      });
-      });
-      var setState = this.setState.bind(this);
+    var setState = this.setState.bind(this);
 
     var searchClick = Rx.FuncSubject.create();
     searchClick.subscribe(this.submitSearch);
@@ -64,7 +46,7 @@ var Search = React.createClass({
   submitSearch(event) {
     let val = this.state.search.trim();
     if (val) {
-      let questions = _.filter(this.state.questions, (question) => {
+      let questions = _.filter(this.props.questions, (question) => {
         var re = new RegExp(val, "gi");
         // Simulate a fulltext search.
         if (question.title.match(re) || question.body.match(re) || question.author.match(re)) {
@@ -72,7 +54,7 @@ var Search = React.createClass({
         }
       });
 
-      let slides = _.filter(this.state.slides, (slide) => {
+      let slides = _.filter(this.props.slides, (slide) => {
         var re = new RegExp(val, "gi");
         // Simulate a fulltext search.
         if (slide.topic.match(re) || slide.body.match(re)) {
@@ -86,8 +68,8 @@ var Search = React.createClass({
       });
     } else if (val == "") {
       this.setState({
-        questions_filtered: this.state.questions,
-        slides_filtered: this.state.slides
+        questions_filtered: this.props.questions,
+        slides_filtered: this.props.slides
       });
     }
   },

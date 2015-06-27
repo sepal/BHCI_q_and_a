@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "topic": "intro into hci",
     "title": "Intro bild und HCI",
     "author": "Mario",
     "body": "Ich frage mich, inwiefern dieses Bild einen Bezug zu Design und/oder human computer interaction hat. Soll keine Kritik sein, ich frage mich dies lediglich, vielleicht kann mich wer erleuchten.",
@@ -15,6 +16,7 @@
   },
   {
     "id": 1,
+    "topic": "intro into hci",
     "title": "inter-disciplinary field slide confusing",
     "author": "Damjan",
     "body": "I think that the diagram is confusing and does not clearly differentiate between the fields; for example there is a label \"Interface Design\" and a label \"Application Design\" but it is not clear from the slide if Interface Design is a part of Application Design, Application Design is a part of Interface Design or they are completely independent. While the diagram may serve the purpose of illustrating the inter-disciplinary nature of HCI, I cannot find it anything but confusing and do not think that it is necessary. Maybe a simplified version which focuses only on the most important parts can show (or at least sketch, assuming that it is not important for every student to have an exact understanding of all the disciplines involved) the inter-disciplinary nature just as well, without the cognitive overload this diagram causes.",
