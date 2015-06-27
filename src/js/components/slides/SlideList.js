@@ -8,7 +8,9 @@ class SlideList extends React.Component {
     var elements = [];
     if (this.props.slides != undefined && this.props.slides.length > 0) {
       _.each(this.props.slides, (slide) => {
-        elements.push(<SlideTeaser {...slide} key={slide.id}/>);
+        elements.push(
+          <SlideTeaser {...slide} key={slide.id} onSetSlide={this.props.onSetSlide} parent={this.props.parent}/>
+        );
       });
     } else {
       elements.push(

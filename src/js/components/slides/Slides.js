@@ -39,7 +39,7 @@ var Slides = React.createClass({
       elements.push(
         <div className="container">
           <h2>{group.topic}</h2>
-          <SlideList slides={group.slides} />
+          <SlideList slides={group.slides} onSetSlide={this.props.onSetSlide} parent="slides" />
         </div>
       );
     });

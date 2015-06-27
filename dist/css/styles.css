@@ -6009,9 +6009,6 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.container-width {
-  max-width: 1200px; }
-
 .search--main .input-group {
   max-width: 600px;
   margin: 0 auto; }
@@ -6036,4 +6033,7 @@ button.close {
 
 img {
   max-width: 100%; }
+
+.slide--teaser {
+  cursor: pointer; }
 

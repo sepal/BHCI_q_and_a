@@ -8,7 +8,8 @@ var App = React.createClass({
     return {
       questions: [],
       slides: [],
-      page: 'search'
+      page: 'search',
+      slide: 0
     }
   },
   componentWillMount: function () {
@@ -28,22 +29,31 @@ var App = React.createClass({
       });
     });
   },
-  handlePageChange: function(page) {
+  handlePageChange: function (page) {
     this.setState({
       page: page
     });
   },
-  render: function() {
+  setSlide: function (options) {
+    console.log(options);
+  },
+  render: function () {
     var content = null;
     if (this.state.page == "search") {
-      content = <Search questions={this.state.questions} slides={this.state.slides} />
+      content = <Search onPageChange={this.handlePageChange}
+                        questions={this.state.questions}
+                        slides={this.state.slides} />
     } else if (this.state.page == 'slides') {
-      content = <Slides slides={this.state.slides} />
+      content = <Slides onSetSlide={this.setSlide}
+                        slides={this.state.slides} />
+    }
+    if (content == 'slide') {
+      content = <div>{this.state.slide}</div>
     }
 
     return (
       <div className="app">
-        <Navigation onPageChange={this.handlePageChange} />
+        <Navigation onPageChange={this.handlePageChange}/>
 
         <div className="container-fluid container">
           {content}
