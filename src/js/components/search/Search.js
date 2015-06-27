@@ -33,8 +33,8 @@ var Search = React.createClass({
         slides: data,
         slides_filtered: data
       });
-    });
-    var setState = this.setState.bind(this);
+      });
+      var setState = this.setState.bind(this);
 
     var searchClick = Rx.FuncSubject.create();
     searchClick.subscribe(this.submitSearch);

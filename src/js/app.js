@@ -1,8 +1,8 @@
 import React from 'react';
-import Search from './components/search/Search';
-
+//import Search from './components/search/Search';
+import Navigation from './components/navigation/navigation.js'
 
 React.render(
-  <Search />,
- $('#app--body').get(0)
+  <Navigation />,
+  $('#app').get(0)
 );

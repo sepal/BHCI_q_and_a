@@ -11,7 +11,7 @@ class QuestionTeaser extends React.Component {
           <h3>{this.props.answers.length} answers</h3>
         </div>
       </div>
-    )
+    );
   }
 };
 
