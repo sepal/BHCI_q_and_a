@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import Rx from 'rx-react';
 
 import Slide from './components/slides/Slide';
 
@@ -7,6 +8,7 @@ var SlideApp = React.createClass({
   getInitialState: function () {
     return {
       questions: [],
+      slides: [],
       slide: null
     };
   },
@@ -32,15 +34,21 @@ var SlideApp = React.createClass({
       url: "data/slides.json"
     }).done((data) => {
       this.setState({
+        slides: data,
         slide: data[parameters['slide']]
       });
     });
+  },
+  changeSlide: function(options) {
+    if (options.slide >= 0 && options.slide < this.state.slides.length) {
+      window.location = `slide.html?slide=${options.slide}`;
+    }
   },
   render: function () {
     return (
       <div className="search-app">
         <div className="container-fluid container">
-          <Slide {...this.state.slide} questions={this.state.questions} />
+          <Slide {...this.state.slide} questions={this.state.questions} onSetSlide={this.changeSlide} />
         </div>
       </div>
     );

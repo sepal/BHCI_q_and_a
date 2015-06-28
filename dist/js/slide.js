@@ -31183,6 +31183,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _rxReact = require('rx-react');
+
+var _rxReact2 = _interopRequireDefault(_rxReact);
+
 var _componentsSlidesSlide = require('./components/slides/Slide');
 
 var _componentsSlidesSlide2 = _interopRequireDefault(_componentsSlidesSlide);
@@ -31193,6 +31197,7 @@ var SlideApp = _react2['default'].createClass({
   getInitialState: function getInitialState() {
     return {
       questions: [],
+      slides: [],
       slide: null
     };
   },
@@ -31220,9 +31225,15 @@ var SlideApp = _react2['default'].createClass({
       url: 'data/slides.json'
     }).done(function (data) {
       _this.setState({
+        slides: data,
         slide: data[parameters['slide']]
       });
     });
+  },
+  changeSlide: function changeSlide(options) {
+    if (options.slide >= 0 && options.slide < this.state.slides.length) {
+      window.location = 'slide.html?slide=' + options.slide;
+    }
   },
   render: function render() {
     return _react2['default'].createElement(
@@ -31231,7 +31242,7 @@ var SlideApp = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         { className: 'container-fluid container' },
-        _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slide, { questions: this.state.questions }))
+        _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slide, { questions: this.state.questions, onSetSlide: this.changeSlide }))
       )
     );
   }
@@ -31239,7 +31250,7 @@ var SlideApp = _react2['default'].createClass({
 
 _react2['default'].render(_react2['default'].createElement(SlideApp, null), $('#app').get(0));
 
-},{"./components/slides/Slide":168,"lodash":170,"react":156}],170:[function(require,module,exports){
+},{"./components/slides/Slide":168,"lodash":170,"react":156,"rx-react":157}],170:[function(require,module,exports){
 (function (global){
 /**
  * @license
