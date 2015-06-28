@@ -5,7 +5,8 @@
   "scripts": {
     "build-js-search": "browserify ./src/js/search.js -t babelify --outfile ./dist/js/search.js",
     "build-js-slides": "browserify ./src/js/slides.js -t babelify --outfile ./dist/js/slides.js",
-    "build-js": "npm run build-js-search && npm run build-js-slides",
+    "build-js-slide": "browserify ./src/js/slide.js -t babelify --outfile ./dist/js/slide.js",
+    "build-js": "npm run build-js-search && npm run build-js-slides && npm run build-js-slide",
     "watch-js": "nodemon -e js -w ./src/js -x 'npm run build-js'",
     "build-sass": "node-sass ./src/sass/styles.scss | postcss -u autoprefixer -o ./dist/css/styles.css",
     "watch-sass": "nodemon -e scss -w ./src/sass -x 'npm run build-sass'",

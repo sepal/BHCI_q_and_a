@@ -39221,12 +39221,17 @@ var SlideTeaser = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var img_path = 'data/slides/thumb/' + this.props.filename;
+      var url = 'slide.html?slide=' + this.props.id;
       return _react2['default'].createElement(
         'div',
         { className: 'slide slide--teaser col-md-4 top17',
           onClick: this.handlers.slideClick,
           'data-slide': this.props.id },
-        _react2['default'].createElement('img', { src: img_path, title: 'Slide Nr. ' + this.props.id })
+        _react2['default'].createElement(
+          'a',
+          { href: url },
+          _react2['default'].createElement('img', { src: img_path, title: 'Slide Nr. ' + this.props.id })
+        )
       );
     }
   }]);

@@ -30951,28 +30951,27 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _SlideTeaser = require('./SlideTeaser');
+var _QuestionTeaser = require('./QuestionTeaser');
 
-var _SlideTeaser2 = _interopRequireDefault(_SlideTeaser);
+var _QuestionTeaser2 = _interopRequireDefault(_QuestionTeaser);
 
-var SlideList = (function (_React$Component) {
-  function SlideList() {
-    _classCallCheck(this, SlideList);
+var QuestionList = (function (_React$Component) {
+  function QuestionList() {
+    _classCallCheck(this, QuestionList);
 
-    _get(Object.getPrototypeOf(SlideList.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(QuestionList.prototype), 'constructor', this).apply(this, arguments);
   }
 
-  _inherits(SlideList, _React$Component);
+  _inherits(QuestionList, _React$Component);
 
-  _createClass(SlideList, [{
+  _createClass(QuestionList, [{
     key: 'render',
     value: function render() {
-      var _this = this;
-
       var elements = [];
-      if (this.props.slides != undefined && this.props.slides.length > 0) {
-        _lodash2['default'].each(this.props.slides, function (slide) {
-          elements.push(_react2['default'].createElement(_SlideTeaser2['default'], _extends({}, slide, { key: slide.id, onSetSlide: _this.props.onSetSlide, parent: _this.props.parent })));
+
+      if (this.props.questions.length > 0) {
+        _lodash2['default'].each(this.props.questions, function (question) {
+          elements.push(_react2['default'].createElement(_QuestionTeaser2['default'], _extends({}, question, { key: question.id })));
         });
       } else {
         elements.push(_react2['default'].createElement(
@@ -30981,36 +30980,90 @@ var SlideList = (function (_React$Component) {
           _react2['default'].createElement(
             'h2',
             null,
-            'No slides found.'
+            'No questions found.'
           )
         ));
       }
 
       return _react2['default'].createElement(
         'div',
-        { className: 'slides' },
+        { className: 'questions' },
         elements
       );
     }
   }]);
 
-  return SlideList;
+  return QuestionList;
 })(_react2['default'].Component);
 
-module.exports = SlideList;
+module.exports = QuestionList;
 
-},{"./SlideTeaser":167,"lodash":170,"react":156}],167:[function(require,module,exports){
+},{"./QuestionTeaser":167,"lodash":170,"react":156}],167:[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var QuestionTeaser = (function (_React$Component) {
+  function QuestionTeaser() {
+    _classCallCheck(this, QuestionTeaser);
+
+    _get(Object.getPrototypeOf(QuestionTeaser.prototype), "constructor", this).apply(this, arguments);
+  }
+
+  _inherits(QuestionTeaser, _React$Component);
+
+  _createClass(QuestionTeaser, [{
+    key: "render",
+    value: function render() {
+      return _react2["default"].createElement(
+        "div",
+        { className: "question question--teaser" },
+        _react2["default"].createElement(
+          "div",
+          { className: "question__title col-md-8" },
+          _react2["default"].createElement(
+            "h3",
+            null,
+            this.props.title
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { className: "question__stats col-md-4" },
+          _react2["default"].createElement(
+            "h5",
+            null,
+            this.props.answers.length,
+            " answers"
+          )
+        )
+      );
+    }
+  }]);
+
+  return QuestionTeaser;
+})(_react2["default"].Component);
+
+;
+
+module.exports = QuestionTeaser;
+
+},{"react":156}],168:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -31020,58 +31073,105 @@ var _rxReact = require('rx-react');
 
 var _rxReact2 = _interopRequireDefault(_rxReact);
 
-var SlideTeaser = (function (_React$Component) {
-  function SlideTeaser() {
-    _classCallCheck(this, SlideTeaser);
+var _lodash = require('lodash');
 
-    _get(Object.getPrototypeOf(SlideTeaser.prototype), 'constructor', this).apply(this, arguments);
-  }
+var _lodash2 = _interopRequireDefault(_lodash);
 
-  _inherits(SlideTeaser, _React$Component);
+var _questionsQuestionList = require('../questions/QuestionList');
 
-  _createClass(SlideTeaser, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _this = this;
+var _questionsQuestionList2 = _interopRequireDefault(_questionsQuestionList);
 
-      var slideClick = _rxReact2['default'].FuncSubject.create();
-      slideClick.map(function (e) {
-        return {
-          slide: _this.props.id,
-          props: _this.props.parent
-        };
-      }).subscribe(this.props.onSetSlide);
+var Slide = _react2['default'].createClass({
+  displayName: 'Slide',
 
-      this.handlers = {
-        slideClick: slideClick
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    var prevClick = _rxReact2['default'].FuncSubject.create();
+    prevClick.map(function (event) {
+      return {
+        slide: _this.props.id - 1,
+        parent: _this.props.parent
       };
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var img_path = 'data/slides/thumb/' + this.props.filename;
-      var url = 'slide.html?slide=' + this.props.id;
-      return _react2['default'].createElement(
+    }).subscribe(this.props.onSetSlide);
+
+    var nextClick = _rxReact2['default'].FuncSubject.create();
+    nextClick.map(function (event) {
+      return {
+        slide: _this.props.id + 1,
+        parent: _this.props.parent
+      };
+    }).subscribe(this.props.onSetSlide);
+    this.handlers = {
+      prevClick: prevClick,
+      nextClick: nextClick
+    };
+  },
+  render: function render() {
+    var _this2 = this;
+
+    var img_path = 'data/slides/full/' + this.props.filename;
+
+    var questions = _lodash2['default'].filter(this.props.questions, function (question) {
+      if (question.topic == _this2.props.topic) {
+        return question;
+      }
+    });
+
+    return _react2['default'].createElement(
+      'div',
+      { className: 'slide container' },
+      _react2['default'].createElement(
+        'h1',
+        null,
+        this.props.topic
+      ),
+      _react2['default'].createElement(
         'div',
-        { className: 'slide slide--teaser col-md-4 top17',
-          onClick: this.handlers.slideClick,
-          'data-slide': this.props.id },
+        { className: 'slide__show container' },
         _react2['default'].createElement(
           'a',
-          { href: url },
-          _react2['default'].createElement('img', { src: img_path, title: 'Slide Nr. ' + this.props.id })
+          { href: 'javascript:void(0)', className: 'col-md-1 slide__controller',
+            onClick: this.handlers.prevClick },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-left',
+            'aria-hidden': 'true' })
+        ),
+        _react2['default'].createElement('img', { src: img_path, className: 'col-md-10' }),
+        _react2['default'].createElement(
+          'a',
+          { href: 'javascript:void(0)',
+            className: 'col-md-1 text-right slide__controller',
+            onClick: this.handlers.nextClick },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-right',
+            'aria-hidden': 'true' })
         )
-      );
-    }
-  }]);
+      ),
+      _react2['default'].createElement(
+        'div',
+        { className: 'question top30' },
+        _react2['default'].createElement(
+          'button',
+          { className: 'btn btn-primary pull-right' },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-plus' }),
+          ' Add question'
+        ),
+        _react2['default'].createElement(
+          'h2',
+          null,
+          'Questions'
+        ),
+        _react2['default'].createElement(_questionsQuestionList2['default'], { questions: questions })
+      )
+    );
+  }
+});
 
-  return SlideTeaser;
-})(_react2['default'].Component);
+module.exports = Slide;
 
-module.exports = SlideTeaser;
-
-},{"react":156,"rx-react":157}],168:[function(require,module,exports){
+},{"../questions/QuestionList":166,"lodash":170,"react":156,"rx-react":157}],169:[function(require,module,exports){
 'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31083,110 +31183,63 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _SlideList = require('./SlideList');
+var _componentsSlidesSlide = require('./components/slides/Slide');
 
-var _SlideList2 = _interopRequireDefault(_SlideList);
+var _componentsSlidesSlide2 = _interopRequireDefault(_componentsSlidesSlide);
 
-var Slides = _react2['default'].createClass({
-  displayName: 'Slides',
-
-  getInitialState: function getInitialState() {
-    return {
-      slide_groups: []
-    };
-  },
-  componentDidMount: function componentDidMount() {
-    this.updateGroups(this.props.slides);
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    this.updateGroups(nextProps.slides);
-  },
-  updateGroups: function updateGroups(slides) {
-    var topics = [];
-    var groups = {};
-
-    _lodash2['default'].forEach(slides, function (slide) {
-      if (topics.indexOf(slide.topic) == -1) {
-        topics.push(slide.topic);
-        groups[slide.topic] = {
-          topic: slide.topic,
-          slides: []
-        };
-      }
-
-      groups[slide.topic].slides.push(slide);
-    });
-
-    this.setState({
-      slide_groups: groups
-    });
-  },
-  render: function render() {
-    var _this = this;
-
-    var elements = [];
-    _lodash2['default'].forEach(this.state.slide_groups, function (group) {
-      elements.push(_react2['default'].createElement(
-        'div',
-        { className: 'container' },
-        _react2['default'].createElement(
-          'h2',
-          null,
-          group.topic
-        ),
-        _react2['default'].createElement(_SlideList2['default'], { slides: group.slides, onSetSlide: _this.props.onSetSlide, parent: 'slides' })
-      ));
-    });
-    return _react2['default'].createElement(
-      'div',
-      null,
-      elements
-    );
-  }
-});
-
-module.exports = Slides;
-
-},{"./SlideList":166,"lodash":170,"react":156}],169:[function(require,module,exports){
-'use strict';
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _componentsSlidesSlidesJs = require('./components/slides/Slides.js');
-
-var _componentsSlidesSlidesJs2 = _interopRequireDefault(_componentsSlidesSlidesJs);
-
-var SlidesApp = _react2['default'].createClass({
-  displayName: 'SlidesApp',
+var SlideApp = _react2['default'].createClass({
+  displayName: 'SlideApp',
 
   getInitialState: function getInitialState() {
     return {
-      slides: []
+      questions: [],
+      slide: null
     };
   },
   componentWillMount: function componentWillMount() {
     var _this = this;
 
+    var parameters = {};
+    var params = window.location.search.replace('?', '');
+    params = params.split('&');
+
+    for (var i in params) {
+      var param = params[i].split('=');
+      parameters[param[0]] = param[1];
+    }
+
+    $.ajax({
+      url: 'data/questions.json'
+    }).done(function (data) {
+      _this.setState({
+        questions: data
+      });
+    });
+
     $.ajax({
       url: 'data/slides.json'
     }).done(function (data) {
       _this.setState({
-        slides: data
+        slide: data[parameters['slide']]
       });
     });
   },
   render: function render() {
-    return _react2['default'].createElement(_componentsSlidesSlidesJs2['default'], { slides: this.state.slides });
+    return _react2['default'].createElement(
+      'div',
+      { className: 'search-app' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'container-fluid container' },
+        _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slide, { questions: this.state.questions }))
+      )
+    );
   }
 });
 
-_react2['default'].render(_react2['default'].createElement(SlidesApp, null), $('#app').get(0));
+_react2['default'].render(_react2['default'].createElement(SlideApp, null), $('#app').get(0));
 
-},{"./components/slides/Slides.js":168,"react":156}],170:[function(require,module,exports){
+},{"./components/slides/Slide":168,"lodash":170,"react":156}],170:[function(require,module,exports){
 (function (global){
 /**
  * @license
