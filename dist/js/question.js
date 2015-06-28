@@ -31353,16 +31353,28 @@ var SlideApp = _react2['default'].createClass({
     }
   },
   render: function render() {
-    return _react2['default'].createElement(
+    var content = _react2['default'].createElement(
       'div',
-      { className: 'search-app' },
+      { className: 'container text-center' },
       _react2['default'].createElement(
+        'h2',
+        null,
+        'The requested question couldn\'t be found.'
+      )
+    );
+    if (this.state.question) {
+      content = _react2['default'].createElement(
         'div',
         { className: 'container-fluid container' },
         _react2['default'].createElement(_componentsQuestionsQuestion2['default'], _extends({}, this.state.question, { voteUp: this.voteUp,
           voteDown: this.voteDown,
           onAnswerSubmit: this.addAnswer }))
-      )
+      );
+    }
+    return _react2['default'].createElement(
+      'div',
+      { className: 'search-app' },
+      content
     );
   }
 });

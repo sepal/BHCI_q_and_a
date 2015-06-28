@@ -86,13 +86,22 @@ var SlideApp = React.createClass({
     }
   },
   render: function () {
-    return (
-      <div className="search-app">
+    let content =
+      <div className="container text-center">
+        <h2>The requested question couldn't be found.</h2>
+      </div>;
+    if (this.state.question) {
+      content =
         <div className="container-fluid container">
           <Question {...this.state.question} voteUp={this.voteUp}
                                              voteDown={this.voteDown}
                                              onAnswerSubmit={this.addAnswer}/>
         </div>
+      ;
+    }
+    return (
+      <div className="search-app">
+        {content}
       </div>
     );
   }
