@@ -18,7 +18,7 @@ var AnswerList = React.createClass({
     return (
       <div className="clearfix answer-list col-sm-11 col-md-offset-1">
         {elements}
-        <AnswerForm />
+        <AnswerForm onAnswerSubmit={this.props.onAnswerSubmit} id={this.props.id}/>
       </div>
     );
   }

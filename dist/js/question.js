@@ -30980,43 +30980,78 @@ var Answer = _react2['default'].createClass({
 module.exports = Answer;
 
 },{"./Vote":169,"react":156}],167:[function(require,module,exports){
-"use strict";
+'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var AnswerForm = _react2["default"].createClass({
-  displayName: "AnswerForm",
+var _rxReact = require('rx-react');
 
+var _rxReact2 = _interopRequireDefault(_rxReact);
+
+var AnswerForm = _react2['default'].createClass({
+  displayName: 'AnswerForm',
+
+  getInitialState: function getInitialState() {
+    return {
+      answer: ''
+    };
+  },
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    var setState = this.setState.bind(this);
+
+    var answerSubmit = _rxReact2['default'].FuncSubject.create();
+    answerSubmit.map(function (e) {
+      return {
+        question_id: _this.props.id,
+        body: _this.state.body
+      };
+    }).subscribe(this.props.onAnswerSubmit);
+
+    var answerChanged = _rxReact2['default'].FuncSubject.create();
+    answerChanged.map(function (e) {
+      return {
+        body: e.target.value
+      };
+    }).subscribe(setState);
+    this.handlers = {
+      answerSubmit: answerSubmit,
+      answerChanged: answerChanged
+    };
+  },
   render: function render() {
-    return _react2["default"].createElement(
-      "div",
-      { className: "clearfix top15" },
-      _react2["default"].createElement(
-        "div",
-        { className: "col-sm-1 author" },
-        _react2["default"].createElement(
-          "div",
-          { className: "" },
-          _react2["default"].createElement("span", { className: "glyphicon glyphicon-user" })
+    return _react2['default'].createElement(
+      'div',
+      { className: 'clearfix top15' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-1 author' },
+        _react2['default'].createElement(
+          'div',
+          { className: '' },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-user' })
         ),
-        _react2["default"].createElement(
-          "div",
+        _react2['default'].createElement(
+          'div',
           null,
-          this.props.author
+          'You'
         )
       ),
-      _react2["default"].createElement(
-        "div",
-        { className: "col-sm-10 top20" },
-        _react2["default"].createElement("textarea", { className: "form-control", rows: "3" }),
-        _react2["default"].createElement(
-          "button",
-          { type: "submit", className: "btn btn-primary top15" },
-          "Submit"
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-10 top20' },
+        _react2['default'].createElement('textarea', { className: 'form-control', rows: '3',
+          onChange: this.handlers.answerChanged }),
+        _react2['default'].createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-primary top15',
+            onClick: this.handlers.answerSubmit },
+          'Submit'
         )
       )
     );
@@ -31025,7 +31060,7 @@ var AnswerForm = _react2["default"].createClass({
 
 module.exports = AnswerForm;
 
-},{"react":156}],168:[function(require,module,exports){
+},{"react":156,"rx-react":157}],168:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -31065,7 +31100,7 @@ var AnswerList = _react2['default'].createClass({
       'div',
       { className: 'clearfix answer-list col-sm-11 col-md-offset-1' },
       elements,
-      _react2['default'].createElement(_AnswerForm2['default'], null)
+      _react2['default'].createElement(_AnswerForm2['default'], { onAnswerSubmit: this.props.onAnswerSubmit, id: this.props.id })
     );
   }
 });
@@ -31192,12 +31227,14 @@ var Question = _react2['default'].createClass({
         { className: 'border-bottom container' },
         _react2['default'].createElement(
           'h3',
-          { classname: 'col-md-offset-2' },
+          { className: 'col-md-offset-2' },
           'Answers'
         )
       ),
       _react2['default'].createElement(_answersAnswerList2['default'], { answers: this.props.answers, voteUp: this.props.voteUp,
-        voteDown: this.props.voteDown })
+        voteDown: this.props.voteDown,
+        onAnswerSubmit: this.props.onAnswerSubmit,
+        id: this.props.id })
     );
   }
 });
@@ -31295,6 +31332,25 @@ var SlideApp = _react2['default'].createClass({
       });
     }
   },
+  addAnswer: function addAnswer(answer) {
+    if (answer.body != '') {
+      var question = this.state.questions[answer.question_id];
+      var questions = this.state.questions;
+
+      answer['author'] = 'You';
+      answer['id'] = questions.length;
+      answer['score'] = 0;
+
+      question.answers.push(answer);
+
+      questions[question.id] = question;
+
+      this.setState({
+        question: question,
+        questions: questions
+      });
+    }
+  },
   render: function render() {
     return _react2['default'].createElement(
       'div',
@@ -31303,7 +31359,8 @@ var SlideApp = _react2['default'].createClass({
         'div',
         { className: 'container-fluid container' },
         _react2['default'].createElement(_componentsQuestionsQuestion2['default'], _extends({}, this.state.question, { voteUp: this.voteUp,
-          voteDown: this.voteDown }))
+          voteDown: this.voteDown,
+          onAnswerSubmit: this.addAnswer }))
       )
     );
   }

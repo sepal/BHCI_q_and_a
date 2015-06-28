@@ -66,12 +66,32 @@ var SlideApp = React.createClass({
       });
     }
   },
+  addAnswer: function (answer) {
+    if (answer.body != "") {
+      let question = this.state.questions[answer.question_id];
+      let questions = this.state.questions;
+
+      answer['author'] = 'You';
+      answer['id'] = questions.length;
+      answer['score'] = 0;
+
+      question.answers.push(answer);
+
+      questions[question.id] = question;
+
+      this.setState({
+        question: question,
+        questions: questions
+      });
+    }
+  },
   render: function () {
     return (
       <div className="search-app">
         <div className="container-fluid container">
           <Question {...this.state.question} voteUp={this.voteUp}
-                                             voteDown={this.voteDown}/>
+                                             voteDown={this.voteDown}
+                                             onAnswerSubmit={this.addAnswer}/>
         </div>
       </div>
     );

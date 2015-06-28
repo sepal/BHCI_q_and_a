@@ -20,10 +20,12 @@ var Question = React.createClass({
           </div>
         </div>
         <div className="border-bottom container">
-          <h3 classname="col-md-offset-2">Answers</h3>
+          <h3 className="col-md-offset-2">Answers</h3>
         </div>
         <AnswerList answers={this.props.answers} voteUp={this.props.voteUp}
-                    voteDown={this.props.voteDown}/>
+                    voteDown={this.props.voteDown}
+                    onAnswerSubmit={this.props.onAnswerSubmit}
+                    id={this.props.id}/>
       </div>
     );
   }
