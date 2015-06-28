@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build-js": "browserify ./src/js/app.js -t babelify --outfile ./dist/js/app.js",
+    "build-js-search": "browserify ./src/js/search.js -t babelify --outfile ./dist/js/search.js",
+    "build-js-slides": "browserify ./src/js/slides.js -t babelify --outfile ./dist/js/slides.js",
+    "build-js": "npm run build-js-search && npm run build-js-slides",
     "watch-js": "nodemon -e js -w ./src/js -x 'npm run build-js'",
     "build-sass": "node-sass ./src/sass/styles.scss | postcss -u autoprefixer -o ./dist/css/styles.css",
     "watch-sass": "nodemon -e scss -w ./src/sass -x 'npm run build-sass'",

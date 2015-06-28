@@ -12,6 +12,9 @@ var Slides = React.createClass({
   componentDidMount: function() {
     this.updateGroups(this.props.slides);
   },
+  componentWillReceiveProps(nextProps) {
+    this.updateGroups(nextProps.slides);
+  },
   updateGroups: function(slides) {
     let topics = [];
     let groups = {};

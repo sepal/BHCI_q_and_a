@@ -38661,188 +38661,6 @@ module.exports = function () {};
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _componentsNavigationNavigation = require('./components/navigation/navigation');
-
-var _componentsNavigationNavigation2 = _interopRequireDefault(_componentsNavigationNavigation);
-
-var _componentsSearchSearch = require('./components/search/Search');
-
-var _componentsSearchSearch2 = _interopRequireDefault(_componentsSearchSearch);
-
-var _componentsSlidesSlides = require('./components/slides/Slides');
-
-var _componentsSlidesSlides2 = _interopRequireDefault(_componentsSlidesSlides);
-
-var _componentsSlidesSlide = require('./components/slides/Slide');
-
-var _componentsSlidesSlide2 = _interopRequireDefault(_componentsSlidesSlide);
-
-var App = _react2['default'].createClass({
-  displayName: 'App',
-
-  getInitialState: function getInitialState() {
-    return {
-      questions: [],
-      slides: [],
-      page: 'search',
-      slide: 0
-    };
-  },
-  componentWillMount: function componentWillMount() {
-    var _this = this;
-
-    $.ajax({
-      url: 'data/questions.json'
-    }).done(function (data) {
-      _this.setState({
-        questions: data
-      });
-    });
-
-    $.ajax({
-      url: 'data/slides.json'
-    }).done(function (data) {
-      _this.setState({
-        slides: data
-      });
-    });
-  },
-  handlePageChange: function handlePageChange(page) {
-    this.setState({
-      page: page
-    });
-  },
-  setSlide: function setSlide(options) {
-    if (options.slide >= 0 && options.slide < this.state.slides.length) {
-      this.setState({
-        page: 'slide',
-        slide: options.slide
-      });
-    }
-  },
-  render: function render() {
-    var content = null;
-    if (this.state.page == 'search') {
-      content = _react2['default'].createElement(_componentsSearchSearch2['default'], { onPageChange: this.handlePageChange,
-        questions: this.state.questions,
-        slides: this.state.slides, onSetSlide: this.setSlide });
-    } else if (this.state.page == 'slides') {
-      content = _react2['default'].createElement(_componentsSlidesSlides2['default'], { onSetSlide: this.setSlide,
-        slides: this.state.slides });
-    } else if (this.state.page == 'slide') {
-      content = _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slides[this.state.slide], {
-        onSetSlide: this.setSlide, questions: this.state.questions }));
-    }
-
-    return _react2['default'].createElement(
-      'div',
-      { className: 'app' },
-      _react2['default'].createElement(_componentsNavigationNavigation2['default'], { onPageChange: this.handlePageChange }),
-      _react2['default'].createElement(
-        'div',
-        { className: 'container-fluid container' },
-        content
-      )
-    );
-  }
-});
-
-_react2['default'].render(_react2['default'].createElement(App, null), $('#app').get(0));
-
-},{"./components/navigation/navigation":239,"./components/search/Search":242,"./components/slides/Slide":244,"./components/slides/Slides":247,"react":228}],239:[function(require,module,exports){
-'use strict';
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _rxReact = require('rx-react');
-
-var _rxReact2 = _interopRequireDefault(_rxReact);
-
-var _reactBootstrap = require('react-bootstrap');
-
-var _reactBootstrap2 = _interopRequireDefault(_reactBootstrap);
-
-var _searchSearchJs = require('../search/Search.js');
-
-var _searchSearchJs2 = _interopRequireDefault(_searchSearchJs);
-
-var _slidesSlides = require('../slides/Slides');
-
-var _slidesSlides2 = _interopRequireDefault(_slidesSlides);
-
-var Nav = _reactBootstrap2['default'].Nav;
-var Navbar = _reactBootstrap2['default'].Navbar;
-var NavItem = _reactBootstrap2['default'].NavItem;
-
-var Navigation = _react2['default'].createClass({
-  displayName: 'Navigation',
-
-  componentWillMount: function componentWillMount() {
-    var setState = this.setState.bind(this);
-    var searchClick = _rxReact2['default'].FuncSubject.create();
-    searchClick.subscribe(this.switchToSearch);
-
-    var slideClick = _rxReact2['default'].FuncSubject.create();
-    slideClick.subscribe(this.switchToSlide);
-
-    this.handlers = {
-      searchClick: searchClick,
-      slideClick: slideClick
-    };
-  },
-  switchToSearch: function switchToSearch() {
-    this.props.onPageChange('search');
-  },
-  switchToSlide: function switchToSlide() {
-    this.props.onPageChange('slides');
-  },
-  render: function render() {
-    return _react2['default'].createElement(
-      'div',
-      { className: 'app' },
-      _react2['default'].createElement(
-        Navbar,
-        { brand: _react2['default'].createElement(
-            'a',
-            { href: '#' },
-            'Aurora'
-          ) },
-        _react2['default'].createElement(
-          Nav,
-          null,
-          _react2['default'].createElement(
-            NavItem,
-            { eventKey: 1, href: 'javascript:void(0)', onClick: this.handlers.searchClick },
-            'Search'
-          ),
-          _react2['default'].createElement(
-            NavItem,
-            { eventKey: 2, href: 'javascript:void(0)', onClick: this.handlers.slideClick },
-            'Slides'
-          )
-        )
-      )
-    );
-  }
-});
-
-module.exports = Navigation;
-
-},{"../search/Search.js":242,"../slides/Slides":247,"react":228,"react-bootstrap":60,"rx-react":229}],240:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -38908,7 +38726,7 @@ var QuestionList = (function (_React$Component) {
 
 module.exports = QuestionList;
 
-},{"./QuestionTeaser":241,"lodash":248,"react":228}],241:[function(require,module,exports){
+},{"./QuestionTeaser":239,"lodash":247,"react":228}],239:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38970,7 +38788,7 @@ var QuestionTeaser = (function (_React$Component) {
 
 module.exports = QuestionTeaser;
 
-},{"react":228}],242:[function(require,module,exports){
+},{"react":228}],240:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39098,7 +38916,7 @@ var Search = _react2['default'].createClass({
 
 module.exports = Search;
 
-},{"./SearchResult":243,"lodash":248,"react":228,"rx-react":229}],243:[function(require,module,exports){
+},{"./SearchResult":241,"lodash":247,"react":228,"rx-react":229}],241:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39173,7 +38991,7 @@ var SearchResult = (function (_React$Component) {
 
 module.exports = SearchResult;
 
-},{"./../questions/QuestionList":240,"./../slides/SlideList":245,"react":228,"react-bootstrap":60}],244:[function(require,module,exports){
+},{"./../questions/QuestionList":238,"./../slides/SlideList":243,"react":228,"react-bootstrap":60}],242:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39281,7 +39099,7 @@ var Slide = _react2['default'].createClass({
 
 module.exports = Slide;
 
-},{"../questions/QuestionList":240,"lodash":248,"react":228,"rx-react":229}],245:[function(require,module,exports){
+},{"../questions/QuestionList":238,"lodash":247,"react":228,"rx-react":229}],243:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -39352,7 +39170,7 @@ var SlideList = (function (_React$Component) {
 
 module.exports = SlideList;
 
-},{"./SlideTeaser":246,"lodash":248,"react":228}],246:[function(require,module,exports){
+},{"./SlideTeaser":244,"lodash":247,"react":228}],244:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39418,7 +39236,7 @@ var SlideTeaser = (function (_React$Component) {
 
 module.exports = SlideTeaser;
 
-},{"react":228,"rx-react":229}],247:[function(require,module,exports){
+},{"react":228,"rx-react":229}],245:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39445,6 +39263,9 @@ var Slides = _react2['default'].createClass({
   },
   componentDidMount: function componentDidMount() {
     this.updateGroups(this.props.slides);
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.updateGroups(nextProps.slides);
   },
   updateGroups: function updateGroups(slides) {
     var topics = [];
@@ -39492,7 +39313,75 @@ var Slides = _react2['default'].createClass({
 
 module.exports = Slides;
 
-},{"./SlideList":245,"lodash":248,"react":228}],248:[function(require,module,exports){
+},{"./SlideList":243,"lodash":247,"react":228}],246:[function(require,module,exports){
+'use strict';
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _componentsSearchSearch = require('./components/search/Search');
+
+var _componentsSearchSearch2 = _interopRequireDefault(_componentsSearchSearch);
+
+var _componentsSlidesSlides = require('./components/slides/Slides');
+
+var _componentsSlidesSlides2 = _interopRequireDefault(_componentsSlidesSlides);
+
+var _componentsSlidesSlide = require('./components/slides/Slide');
+
+var _componentsSlidesSlide2 = _interopRequireDefault(_componentsSlidesSlide);
+
+var SearchApp = _react2['default'].createClass({
+  displayName: 'SearchApp',
+
+  getInitialState: function getInitialState() {
+    return {
+      questions: [],
+      slides: []
+    };
+  },
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    $.ajax({
+      url: 'data/questions.json'
+    }).done(function (data) {
+      _this.setState({
+        questions: data
+      });
+    });
+
+    $.ajax({
+      url: 'data/slides.json'
+    }).done(function (data) {
+      _this.setState({
+        slides: data
+      });
+    });
+  },
+  render: function render() {
+    var content = null;
+
+    return _react2['default'].createElement(
+      'div',
+      { className: 'search-app' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'container-fluid container' },
+        _react2['default'].createElement(_componentsSearchSearch2['default'], { onPageChange: this.handlePageChange,
+          questions: this.state.questions,
+          slides: this.state.slides, onSetSlide: this.setSlide })
+      )
+    );
+  }
+});
+
+_react2['default'].render(_react2['default'].createElement(SearchApp, null), $('#app').get(0));
+
+},{"./components/search/Search":240,"./components/slides/Slide":242,"./components/slides/Slides":245,"react":228}],247:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -51731,4 +51620,4 @@ module.exports = Slides;
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[238]);
+},{}]},{},[246]);
