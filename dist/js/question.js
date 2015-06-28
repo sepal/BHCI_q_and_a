@@ -30929,34 +30929,47 @@ module.exports = function () {};
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],166:[function(require,module,exports){
-"use strict";
+'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var Answer = _react2["default"].createClass({
-  displayName: "Answer",
+var _Vote = require('./Vote');
+
+var _Vote2 = _interopRequireDefault(_Vote);
+
+var Answer = _react2['default'].createClass({
+  displayName: 'Answer',
 
   render: function render() {
-    return _react2["default"].createElement(
-      "div",
-      { className: "clearfix top15" },
-      _react2["default"].createElement(
-        "div",
-        { className: "col-sm-2 author" },
-        _react2["default"].createElement("div", { className: "glyphicon glyphicon-user" }),
-        _react2["default"].createElement(
-          "div",
+    return _react2['default'].createElement(
+      'div',
+      { className: 'clearfix top15' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-1 author' },
+        _react2['default'].createElement(
+          'div',
+          { className: '' },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-user' })
+        ),
+        _react2['default'].createElement(
+          'div',
           null,
           this.props.author
         )
       ),
-      _react2["default"].createElement(
-        "div",
-        { className: "col-sm-10" },
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-1' },
+        _react2['default'].createElement(_Vote2['default'], { score: this.props.score })
+      ),
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-10 top20' },
         this.props.body
       )
     );
@@ -30965,7 +30978,7 @@ var Answer = _react2["default"].createClass({
 
 module.exports = Answer;
 
-},{"react":156}],167:[function(require,module,exports){
+},{"./Vote":168,"react":156}],167:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -31005,7 +31018,44 @@ var AnswerList = _react2['default'].createClass({
 
 module.exports = AnswerList;
 
-},{"./Answer":166,"lodash":171,"react":156}],168:[function(require,module,exports){
+},{"./Answer":166,"lodash":172,"react":156}],168:[function(require,module,exports){
+"use strict";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var Vote = _react2["default"].createClass({
+  displayName: "Vote",
+
+  render: function render() {
+    return _react2["default"].createElement(
+      "div",
+      { className: "vote" },
+      _react2["default"].createElement(
+        "a",
+        { href: "javascript:void(0)", className: "" },
+        _react2["default"].createElement("span", { className: "glyphicon glyphicon-triangle-top" })
+      ),
+      _react2["default"].createElement(
+        "div",
+        null,
+        this.props.score
+      ),
+      _react2["default"].createElement(
+        "a",
+        { href: "javascript:void(0)", className: "" },
+        _react2["default"].createElement("span", { className: "glyphicon glyphicon-triangle-bottom" })
+      )
+    );
+  }
+});
+
+module.exports = Vote;
+
+},{"react":156}],169:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -31073,7 +31123,7 @@ var Question = _react2['default'].createClass({
 
 module.exports = Question;
 
-},{"../answers/AnswerList":167,"lodash":171,"react":156,"rx-react":157}],169:[function(require,module,exports){
+},{"../answers/AnswerList":167,"lodash":172,"react":156,"rx-react":157}],170:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -31136,7 +31186,7 @@ var SlideApp = _react2['default'].createClass({
 
 _react2['default'].render(_react2['default'].createElement(SlideApp, null), $('#app').get(0));
 
-},{"./components/questions/Question":168,"./utils/url":170,"lodash":171,"react":156,"rx-react":157}],170:[function(require,module,exports){
+},{"./components/questions/Question":169,"./utils/url":171,"lodash":172,"react":156,"rx-react":157}],171:[function(require,module,exports){
 "use strict";
 
 exports.getParams = function () {
@@ -31162,7 +31212,7 @@ exports.set = function (page, parameters) {
   window.location = page + "?" + params;
 };
 
-},{}],171:[function(require,module,exports){
+},{}],172:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -43401,4 +43451,4 @@ exports.set = function (page, parameters) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[169]);
+},{}]},{},[170]);

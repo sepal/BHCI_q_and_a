@@ -6016,17 +6016,14 @@ button.close {
 .top5 {
   margin-top: 5px; }
 
-.top7 {
-  margin-top: 7px; }
-
 .top10 {
   margin-top: 10px; }
 
 .top15 {
   margin-top: 15px; }
 
-.top17 {
-  margin-top: 17px; }
+.top20 {
+  margin-top: 20px; }
 
 .top30 {
   margin-top: 30px; }
@@ -6035,12 +6032,18 @@ img {
   max-width: 100%; }
 
 .slide__controller {
-  font-size: 4em; }
+  font-size: 4em;
+  line-height: 518px; }
 
 .author {
   text-align: center; }
   .author .glyphicon {
     font-size: 4em; }
+
+.vote {
+  text-align: center; }
+  .vote .glyphicon {
+    font-size: 2em; }
 
 .border-bottom {
   border-bottom: 1px solid #777777; }
