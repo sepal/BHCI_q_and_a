@@ -38773,7 +38773,7 @@ var QuestionTeaser = (function (_React$Component) {
           ),
           _react2["default"].createElement(
             "div",
-            { className: "question__stats col-md-4" },
+            { className: "question__stats col-md-4 top15" },
             _react2["default"].createElement(
               "h5",
               null,
