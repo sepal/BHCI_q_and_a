@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import Answer from './Answer';
+import AnswerForm from './AnswerForm';
 
 var AnswerList = React.createClass({
   render: function () {
@@ -17,6 +18,7 @@ var AnswerList = React.createClass({
     return (
       <div className="clearfix answer-list col-sm-11 col-md-offset-1">
         {elements}
+        <AnswerForm />
       </div>
     );
   }
