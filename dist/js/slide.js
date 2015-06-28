@@ -31027,26 +31027,31 @@ var QuestionTeaser = (function (_React$Component) {
   _createClass(QuestionTeaser, [{
     key: "render",
     value: function render() {
+      var url = "question.html?question=" + this.props.id;
       return _react2["default"].createElement(
         "div",
         { className: "question question--teaser" },
         _react2["default"].createElement(
-          "div",
-          { className: "question__title col-md-8" },
+          "a",
+          { href: url },
           _react2["default"].createElement(
-            "h3",
-            null,
-            this.props.title
-          )
-        ),
-        _react2["default"].createElement(
-          "div",
-          { className: "question__stats col-md-4" },
+            "div",
+            { className: "question__title col-md-8" },
+            _react2["default"].createElement(
+              "h3",
+              null,
+              this.props.title
+            )
+          ),
           _react2["default"].createElement(
-            "h5",
-            null,
-            this.props.answers.length,
-            " answers"
+            "div",
+            { className: "question__stats col-md-4" },
+            _react2["default"].createElement(
+              "h5",
+              null,
+              this.props.answers.length,
+              " answers"
+            )
           )
         )
       );

@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Rx from 'rx-react';
 
-import Slide from './components/slides/Slide';
+import Question from './components/questions/Question';
 import url from './utils/url';
 
 var SlideApp = React.createClass({
@@ -19,31 +19,16 @@ var SlideApp = React.createClass({
       url: "data/questions.json"
     }).done((data) => {
       this.setState({
-        questions: data
+        questions: data,
+        question: data[parameters.question]
       });
     });
-
-    $.ajax({
-      url: "data/slides.json"
-    }).done((data) => {
-      this.setState({
-        slides: data,
-        slide: data[parameters['slide']]
-      });
-    });
-  },
-  changeSlide: function(options) {
-    if (options.slide >= 0 && options.slide < this.state.slides.length) {
-      url.set('slide.html', [
-        {slide: options.slide}
-      ]);
-    }
   },
   render: function () {
     return (
       <div className="search-app">
         <div className="container-fluid container">
-          <Slide {...this.state.slide} questions={this.state.questions} onSetSlide={this.changeSlide} />
+          <Question {...this.state.question} />
         </div>
       </div>
     );
