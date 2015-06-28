@@ -6042,3 +6042,6 @@ img {
   .author .glyphicon {
     font-size: 4em; }
 
+.border-bottom {
+  border-bottom: 1px solid #777777; }
+

@@ -30929,6 +30929,83 @@ module.exports = function () {};
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],166:[function(require,module,exports){
+"use strict";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var Answer = _react2["default"].createClass({
+  displayName: "Answer",
+
+  render: function render() {
+    return _react2["default"].createElement(
+      "div",
+      { className: "clearfix top15" },
+      _react2["default"].createElement(
+        "div",
+        { className: "col-sm-2 author" },
+        _react2["default"].createElement("div", { className: "glyphicon glyphicon-user" }),
+        _react2["default"].createElement(
+          "div",
+          null,
+          this.props.author
+        )
+      ),
+      _react2["default"].createElement(
+        "div",
+        { className: "col-sm-10" },
+        this.props.body
+      )
+    );
+  }
+});
+
+module.exports = Answer;
+
+},{"react":156}],167:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _Answer = require('./Answer');
+
+var _Answer2 = _interopRequireDefault(_Answer);
+
+var AnswerList = _react2['default'].createClass({
+  displayName: 'AnswerList',
+
+  render: function render() {
+    var elements = [];
+    console.log(this.props);
+
+    _lodash2['default'].each(this.props.answers, function (answer, key) {
+      elements.push(_react2['default'].createElement(_Answer2['default'], _extends({}, answer, { key: key })));
+    });
+
+    return _react2['default'].createElement(
+      'div',
+      { className: 'clearfix answer-list col-sm-11 col-md-offset-1' },
+      elements
+    );
+  }
+});
+
+module.exports = AnswerList;
+
+},{"./Answer":166,"lodash":171,"react":156}],168:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -30945,41 +31022,58 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _answersAnswerList = require('../answers/AnswerList');
+
+var _answersAnswerList2 = _interopRequireDefault(_answersAnswerList);
+
 var Question = _react2['default'].createClass({
   displayName: 'Question',
 
-  componentWillMount: function componentWillMount() {},
   render: function render() {
     return _react2['default'].createElement(
       'div',
       { className: 'container' },
       _react2['default'].createElement(
-        'h1',
-        null,
-        this.props.title
-      ),
-      _react2['default'].createElement(
         'div',
-        { className: 'col-sm-2 author' },
-        _react2['default'].createElement('div', { className: 'glyphicon glyphicon-user' }),
+        { className: 'container question' },
+        _react2['default'].createElement(
+          'h1',
+          null,
+          this.props.title
+        ),
         _react2['default'].createElement(
           'div',
-          null,
-          this.props.author
+          { className: 'col-sm-2 author' },
+          _react2['default'].createElement('div', { className: 'glyphicon glyphicon-user' }),
+          _react2['default'].createElement(
+            'div',
+            null,
+            this.props.author
+          )
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'col-sm-10 top15' },
+          this.props.body
         )
       ),
       _react2['default'].createElement(
         'div',
-        { className: 'col-sm-10' },
-        this.props.body
-      )
+        { className: 'border-bottom container' },
+        _react2['default'].createElement(
+          'h3',
+          { classname: 'col-md-offset-2' },
+          'Answers'
+        )
+      ),
+      _react2['default'].createElement(_answersAnswerList2['default'], { answers: this.props.answers })
     );
   }
 });
 
 module.exports = Question;
 
-},{"lodash":169,"react":156,"rx-react":157}],167:[function(require,module,exports){
+},{"../answers/AnswerList":167,"lodash":171,"react":156,"rx-react":157}],169:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -31042,7 +31136,7 @@ var SlideApp = _react2['default'].createClass({
 
 _react2['default'].render(_react2['default'].createElement(SlideApp, null), $('#app').get(0));
 
-},{"./components/questions/Question":166,"./utils/url":168,"lodash":169,"react":156,"rx-react":157}],168:[function(require,module,exports){
+},{"./components/questions/Question":168,"./utils/url":170,"lodash":171,"react":156,"rx-react":157}],170:[function(require,module,exports){
 "use strict";
 
 exports.getParams = function () {
@@ -31068,7 +31162,7 @@ exports.set = function (page, parameters) {
   window.location = page + "?" + params;
 };
 
-},{}],169:[function(require,module,exports){
+},{}],171:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -43307,4 +43401,4 @@ exports.set = function (page, parameters) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[167]);
+},{}]},{},[169]);
