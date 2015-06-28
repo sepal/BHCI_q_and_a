@@ -31272,7 +31272,7 @@ exports.getParams = function () {
 
 exports.set = function (page, parameters) {
   var params = [];
-  console.log(parameters);
+
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }

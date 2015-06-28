@@ -6,11 +6,11 @@ import Answer from './Answer';
 var AnswerList = React.createClass({
   render: function () {
     var elements = [];
-    console.log(this.props);
 
     _.each(this.props.answers, (answer, key) => {
       elements.push(
-        <Answer {...answer} key={key} />
+        <Answer {...answer} key={key} voteUp={this.props.voteUp}
+                            voteDown={this.props.voteDown}/>
       );
     });
 

@@ -10,6 +10,7 @@ var Question = React.createClass({
       <div className="container">
         <div className="container question">
           <h1>{this.props.title}</h1>
+
           <div className="col-sm-2 author">
             <div className="glyphicon glyphicon-user"></div>
             <div>{this.props.author}</div>
@@ -21,7 +22,8 @@ var Question = React.createClass({
         <div className="border-bottom container">
           <h3 classname="col-md-offset-2">Answers</h3>
         </div>
-        <AnswerList answers={this.props.answers} />
+        <AnswerList answers={this.props.answers} voteUp={this.props.voteUp}
+                    voteDown={this.props.voteDown}/>
       </div>
     );
   }

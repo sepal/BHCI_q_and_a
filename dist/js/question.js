@@ -30965,7 +30965,8 @@ var Answer = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         { className: 'col-sm-1' },
-        _react2['default'].createElement(_Vote2['default'], { score: this.props.score })
+        _react2['default'].createElement(_Vote2['default'], { score: this.props.score, voteUp: this.props.voteUp,
+          voteDown: this.props.voteDown, id: this.props.id })
       ),
       _react2['default'].createElement(
         'div',
@@ -31001,11 +31002,13 @@ var AnswerList = _react2['default'].createClass({
   displayName: 'AnswerList',
 
   render: function render() {
+    var _this = this;
+
     var elements = [];
-    console.log(this.props);
 
     _lodash2['default'].each(this.props.answers, function (answer, key) {
-      elements.push(_react2['default'].createElement(_Answer2['default'], _extends({}, answer, { key: key })));
+      elements.push(_react2['default'].createElement(_Answer2['default'], _extends({}, answer, { key: key, voteUp: _this.props.voteUp,
+        voteDown: _this.props.voteDown })));
     });
 
     return _react2['default'].createElement(
@@ -31019,35 +31022,61 @@ var AnswerList = _react2['default'].createClass({
 module.exports = AnswerList;
 
 },{"./Answer":166,"lodash":172,"react":156}],168:[function(require,module,exports){
-"use strict";
+'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var Vote = _react2["default"].createClass({
-  displayName: "Vote",
+var _rxReact = require('rx-react');
 
+var _rxReact2 = _interopRequireDefault(_rxReact);
+
+var Vote = _react2['default'].createClass({
+  displayName: 'Vote',
+
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    var voteUpClick = _rxReact2['default'].FuncSubject.create();
+    voteUpClick.map(function (e) {
+      return {
+        id: _this.props.id
+      };
+    }).subscribe(this.props.voteUp);
+
+    var voteDownClick = _rxReact2['default'].FuncSubject.create();
+    voteDownClick.map(function (e) {
+      return {
+        id: _this.props.id
+      };
+    }).subscribe(this.props.voteDown);
+
+    this.handlers = {
+      voteUpClick: voteUpClick,
+      voteDownClick: voteDownClick
+    };
+  },
   render: function render() {
-    return _react2["default"].createElement(
-      "div",
-      { className: "vote" },
-      _react2["default"].createElement(
-        "a",
-        { href: "javascript:void(0)", className: "" },
-        _react2["default"].createElement("span", { className: "glyphicon glyphicon-triangle-top" })
+    return _react2['default'].createElement(
+      'div',
+      { className: 'vote' },
+      _react2['default'].createElement(
+        'a',
+        { href: 'javascript:void(0)', onClick: this.handlers.voteUpClick },
+        _react2['default'].createElement('span', { className: 'glyphicon glyphicon-triangle-top' })
       ),
-      _react2["default"].createElement(
-        "div",
+      _react2['default'].createElement(
+        'div',
         null,
         this.props.score
       ),
-      _react2["default"].createElement(
-        "a",
-        { href: "javascript:void(0)", className: "" },
-        _react2["default"].createElement("span", { className: "glyphicon glyphicon-triangle-bottom" })
+      _react2['default'].createElement(
+        'a',
+        { href: 'javascript:void(0)', onClick: this.handlers.voteDownClick },
+        _react2['default'].createElement('span', { className: 'glyphicon glyphicon-triangle-bottom' })
       )
     );
   }
@@ -31055,7 +31084,7 @@ var Vote = _react2["default"].createClass({
 
 module.exports = Vote;
 
-},{"react":156}],169:[function(require,module,exports){
+},{"react":156,"rx-react":157}],169:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -31116,7 +31145,8 @@ var Question = _react2['default'].createClass({
           'Answers'
         )
       ),
-      _react2['default'].createElement(_answersAnswerList2['default'], { answers: this.props.answers })
+      _react2['default'].createElement(_answersAnswerList2['default'], { answers: this.props.answers, voteUp: this.props.voteUp,
+        voteDown: this.props.voteDown })
     );
   }
 });
@@ -31125,6 +31155,8 @@ module.exports = Question;
 
 },{"../answers/AnswerList":167,"lodash":172,"react":156,"rx-react":157}],170:[function(require,module,exports){
 'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31154,7 +31186,8 @@ var SlideApp = _react2['default'].createClass({
   getInitialState: function getInitialState() {
     return {
       questions: [],
-      question: null
+      question: null,
+      voted_answers: []
     };
   },
   componentWillMount: function componentWillMount() {
@@ -31171,6 +31204,46 @@ var SlideApp = _react2['default'].createClass({
       });
     });
   },
+  voteUp: function voteUp(options) {
+    var voted_answers = this.state.voted_answers;
+
+    if (this.state.voted_answers.indexOf(options.id) == -1) {
+      var question = this.state.question;
+      var questions = this.state.questions;
+
+      question.answers[options.id].score++;
+      questions[question.id] = question;
+
+      voted_answers.push(options.id);
+
+      this.setState({
+        question: question,
+        questions: questions,
+        voted: true,
+        voted_answers: voted_answers
+      });
+    }
+  },
+  voteDown: function voteDown(options) {
+    var voted_answers = this.state.voted_answers;
+    if (voted_answers.indexOf(options.id) == -1) {
+      var question = this.state.question;
+      var questions = this.state.questions;
+      var _voted_answers = this.state.voted_answers;
+
+      question.answers[options.id].score--;
+      questions[question.id] = question;
+
+      _voted_answers.push(options.id);
+
+      this.setState({
+        question: question,
+        questions: questions,
+        voted: true,
+        voted_answers: _voted_answers
+      });
+    }
+  },
   render: function render() {
     return _react2['default'].createElement(
       'div',
@@ -31178,7 +31251,8 @@ var SlideApp = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         { className: 'container-fluid container' },
-        _react2['default'].createElement(_componentsQuestionsQuestion2['default'], this.state.question)
+        _react2['default'].createElement(_componentsQuestionsQuestion2['default'], _extends({}, this.state.question, { voteUp: this.voteUp,
+          voteDown: this.voteDown }))
       )
     );
   }
@@ -31204,7 +31278,7 @@ exports.getParams = function () {
 
 exports.set = function (page, parameters) {
   var params = [];
-  console.log(parameters);
+
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }

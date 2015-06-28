@@ -15,7 +15,7 @@ exports.getParams = function() {
 
 exports.set = function(page, parameters) {
   let params = [];
-  console.log(parameters);
+
   for (let i in parameters) {
     params.push(`${i}=${parameters[i]}`);
   }
