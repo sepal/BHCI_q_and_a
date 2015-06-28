@@ -49,10 +49,17 @@ var Slide = React.createClass({
       cancelClick: cancelClick
     }
   },
-  showQuestionForm: function (showForm) {
+  showQuestionForm: function(showForm) {
     this.setState({
       showForm: showForm
     });
+  },
+  submitQuestion:function(question) {
+    if (this.props.onQuestionSubmit) {
+      question['topic'] = this.props.topic;
+      this.props.onQuestionSubmit(question);
+    }
+    this.showQuestionForm(false);
   },
   render: function () {
     var img_path = `data/slides/full/${this.props.filename}`;
@@ -70,7 +77,7 @@ var Slide = React.createClass({
       </button>;
     if (this.state.showForm) {
       questionForm =
-        <QuestionForm onQuestionSubmit={this.props.onQuestionSubmit}
+        <QuestionForm onQuestionSubmit={this.submitQuestion}
                       onCancel={this.handlers.cancelClick}/>;
     }
 

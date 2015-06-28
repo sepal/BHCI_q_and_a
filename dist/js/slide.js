@@ -31240,6 +31240,13 @@ var Slide = _react2['default'].createClass({
       showForm: showForm
     });
   },
+  submitQuestion: function submitQuestion(question) {
+    if (this.props.onQuestionSubmit) {
+      question['topic'] = this.props.topic;
+      this.props.onQuestionSubmit(question);
+    }
+    this.showQuestionForm(false);
+  },
   render: function render() {
     var _this2 = this;
 
@@ -31259,7 +31266,7 @@ var Slide = _react2['default'].createClass({
       ' Add question'
     );
     if (this.state.showForm) {
-      questionForm = _react2['default'].createElement(_questionsQuestionForm2['default'], { onQuestionSubmit: this.props.onQuestionSubmit,
+      questionForm = _react2['default'].createElement(_questionsQuestionForm2['default'], { onQuestionSubmit: this.submitQuestion,
         onCancel: this.handlers.cancelClick });
     }
 
@@ -31378,6 +31385,18 @@ var SlideApp = _react2['default'].createClass({
       });
     }
   },
+  addQuestion: function addQuestion(question) {
+    var questions = this.state.questions;
+    question['id'] = this.state.questions.length;
+    question['author'] = 'you';
+    question['answers'] = [];
+
+    questions.unshift(question);
+
+    this.setState({
+      questions: questions
+    });
+  },
   render: function render() {
     return _react2['default'].createElement(
       'div',
@@ -31385,7 +31404,9 @@ var SlideApp = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         { className: 'container-fluid container' },
-        _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slide, { questions: this.state.questions, onSetSlide: this.changeSlide }))
+        _react2['default'].createElement(_componentsSlidesSlide2['default'], _extends({}, this.state.slide, { questions: this.state.questions,
+          onSetSlide: this.changeSlide,
+          onQuestionSubmit: this.addQuestion }))
       )
     );
   }

@@ -33,18 +33,32 @@ var SlideApp = React.createClass({
       });
     });
   },
-  changeSlide: function(options) {
+  changeSlide: function (options) {
     if (options.slide >= 0 && options.slide < this.state.slides.length) {
       url.set('slide.html', {
         slide: options.slide
       });
     }
   },
+  addQuestion: function (question) {
+    var questions = this.state.questions;
+    question['id'] = this.state.questions.length;
+    question['author'] = 'you';
+    question['answers'] = [];
+
+    questions.unshift(question);
+
+    this.setState({
+      questions: questions
+    });
+  },
   render: function () {
     return (
       <div className="search-app">
         <div className="container-fluid container">
-          <Slide {...this.state.slide} questions={this.state.questions} onSetSlide={this.changeSlide} />
+          <Slide {...this.state.slide} questions={this.state.questions}
+                                       onSetSlide={this.changeSlide}
+                                       onQuestionSubmit={this.addQuestion}/>
         </div>
       </div>
     );
