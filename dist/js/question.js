@@ -31046,7 +31046,8 @@ var AnswerForm = _react2['default'].createClass({
         'div',
         { className: 'col-sm-10 top20' },
         _react2['default'].createElement('textarea', { className: 'form-control', rows: '3',
-          onChange: this.handlers.answerChanged }),
+          onChange: this.handlers.answerChanged,
+          placeholder: 'Enter your answer...' }),
         _react2['default'].createElement(
           'button',
           { type: 'submit', className: 'btn btn-primary top15',

@@ -37,11 +37,11 @@ var Slides = React.createClass({
   },
   render: function() {
     var elements = [];
-    _.forEach(this.state.slide_groups, (group) => {
+    _.forEach(this.state.slide_groups, (group, key) => {
       elements.push(
         <div className="container">
           <h2>{group.topic}</h2>
-          <SlideList slides={group.slides} onSetSlide={this.props.onSetSlide} parent="slides" />
+          <SlideList key={key} slides={group.slides} onSetSlide={this.props.onSetSlide} parent="slides" />
         </div>
       );
     });

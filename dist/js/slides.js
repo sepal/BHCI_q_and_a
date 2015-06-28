@@ -31125,7 +31125,7 @@ var Slides = _react2['default'].createClass({
     var _this = this;
 
     var elements = [];
-    _lodash2['default'].forEach(this.state.slide_groups, function (group) {
+    _lodash2['default'].forEach(this.state.slide_groups, function (group, key) {
       elements.push(_react2['default'].createElement(
         'div',
         { className: 'container' },
@@ -31134,7 +31134,7 @@ var Slides = _react2['default'].createClass({
           null,
           group.topic
         ),
-        _react2['default'].createElement(_SlideList2['default'], { slides: group.slides, onSetSlide: _this.props.onSetSlide, parent: 'slides' })
+        _react2['default'].createElement(_SlideList2['default'], { key: key, slides: group.slides, onSetSlide: _this.props.onSetSlide, parent: 'slides' })
       ));
     });
     return _react2['default'].createElement(

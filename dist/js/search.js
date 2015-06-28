@@ -38659,6 +38659,111 @@ module.exports = function () {};
 },{"_process":1}],238:[function(require,module,exports){
 'use strict';
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _rxReact = require('rx-react');
+
+var _rxReact2 = _interopRequireDefault(_rxReact);
+
+var QuestionForm = _react2['default'].createClass({
+  displayName: 'QuestionForm',
+
+  getInitialState: function getInitialState() {
+    return {
+      title: '',
+      body: ''
+    };
+  },
+  componentWillMount: function componentWillMount() {
+    var _this = this;
+
+    var setState = this.setState.bind(this);
+
+    var questionSubmit = _rxReact2['default'].FuncSubject.create();
+    questionSubmit.map(function (e) {
+      return {
+        title: _this.state.title,
+        body: _this.state.body
+      };
+    }).subscribe(this.props.onQuestionSubmit);
+
+    var bodyChanged = _rxReact2['default'].FuncSubject.create();
+    bodyChanged.map(function (e) {
+      return {
+        body: e.target.value
+      };
+    }).subscribe(setState);
+
+    var titleChanged = _rxReact2['default'].FuncSubject.create();
+    titleChanged.map(function (e) {
+      return {
+        title: e.target.value
+      };
+    }).subscribe(setState);
+
+    this.handlers = {
+      questionSubmit: questionSubmit,
+      bodyChanged: bodyChanged,
+      titleChanged: titleChanged
+    };
+  },
+  render: function render() {
+    return _react2['default'].createElement(
+      'div',
+      { className: 'clearfix top15' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-1 author' },
+        _react2['default'].createElement(
+          'div',
+          { className: '' },
+          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-user' })
+        ),
+        _react2['default'].createElement(
+          'div',
+          null,
+          'You'
+        )
+      ),
+      _react2['default'].createElement(
+        'div',
+        { className: 'col-sm-10 top20' },
+        _react2['default'].createElement(
+          'div',
+          { className: 'form-group' },
+          _react2['default'].createElement('input', { type: 'text', className: 'form-control',
+            onChange: this.handlers.titleChanged,
+            placeholder: 'Enter a title...' }),
+          _react2['default'].createElement('textarea', { className: 'form-control top15', rows: '3',
+            onChange: this.handlers.bodyChanged,
+            placeholder: 'Enter your question...' })
+        ),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.props.onCancel, className: 'btn btn-default' },
+          'Cancel'
+        ),
+        ' ',
+        _react2['default'].createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-primary',
+            onClick: this.handlers.questionSubmit },
+          'Submit'
+        )
+      )
+    );
+  }
+});
+
+module.exports = QuestionForm;
+
+},{"react":228,"rx-react":229}],239:[function(require,module,exports){
+'use strict';
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38726,7 +38831,7 @@ var QuestionList = (function (_React$Component) {
 
 module.exports = QuestionList;
 
-},{"./QuestionTeaser":239,"lodash":247,"react":228}],239:[function(require,module,exports){
+},{"./QuestionTeaser":240,"lodash":248,"react":228}],240:[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38793,7 +38898,7 @@ var QuestionTeaser = (function (_React$Component) {
 
 module.exports = QuestionTeaser;
 
-},{"react":228}],240:[function(require,module,exports){
+},{"react":228}],241:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -38921,7 +39026,7 @@ var Search = _react2['default'].createClass({
 
 module.exports = Search;
 
-},{"./SearchResult":241,"lodash":247,"react":228,"rx-react":229}],241:[function(require,module,exports){
+},{"./SearchResult":242,"lodash":248,"react":228,"rx-react":229}],242:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -38978,7 +39083,7 @@ var SearchResult = (function (_React$Component) {
           _react2['default'].createElement(
             TabPane,
             { eventKey: 1, tab: 'Questions' },
-            _react2['default'].createElement(_questionsQuestionList2['default'], { questions: this.props.questions })
+            _react2['default'].createElement(_questionsQuestionList2['default'], { questions: this.props.questions, showForm: false })
           ),
           _react2['default'].createElement(
             TabPane,
@@ -38996,7 +39101,7 @@ var SearchResult = (function (_React$Component) {
 
 module.exports = SearchResult;
 
-},{"./../questions/QuestionList":238,"./../slides/SlideList":243,"react":228,"react-bootstrap":60}],242:[function(require,module,exports){
+},{"./../questions/QuestionList":239,"./../slides/SlideList":244,"react":228,"react-bootstrap":60}],243:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39017,9 +39122,18 @@ var _questionsQuestionList = require('../questions/QuestionList');
 
 var _questionsQuestionList2 = _interopRequireDefault(_questionsQuestionList);
 
+var _questionsQuestionForm = require('../questions/QuestionForm');
+
+var _questionsQuestionForm2 = _interopRequireDefault(_questionsQuestionForm);
+
 var Slide = _react2['default'].createClass({
   displayName: 'Slide',
 
+  getInitialState: function getInitialState() {
+    return {
+      showForm: false
+    };
+  },
   componentWillMount: function componentWillMount() {
     var _this = this;
 
@@ -39038,10 +39152,24 @@ var Slide = _react2['default'].createClass({
         parent: _this.props.parent
       };
     }).subscribe(this.props.onSetSlide);
+
+    var addClick = _rxReact2['default'].FuncSubject.create();
+    addClick.map(true).subscribe(this.showQuestionForm);
+
+    var cancelClick = _rxReact2['default'].FuncSubject.create();
+    cancelClick.map(false).subscribe(this.showQuestionForm);
+
     this.handlers = {
       prevClick: prevClick,
-      nextClick: nextClick
+      nextClick: nextClick,
+      addClick: addClick,
+      cancelClick: cancelClick
     };
+  },
+  showQuestionForm: function showQuestionForm(showForm) {
+    this.setState({
+      showForm: showForm
+    });
   },
   render: function render() {
     var _this2 = this;
@@ -39053,6 +39181,18 @@ var Slide = _react2['default'].createClass({
         return question;
       }
     });
+
+    var questionForm = _react2['default'].createElement(
+      'button',
+      { className: 'btn btn-primary top20',
+        onClick: this.handlers.addClick },
+      _react2['default'].createElement('span', { className: 'glyphicon glyphicon-plus' }),
+      ' Add question'
+    );
+    if (this.state.showForm) {
+      questionForm = _react2['default'].createElement(_questionsQuestionForm2['default'], { onQuestionSubmit: this.props.onQuestionSubmit,
+        onCancel: this.handlers.cancelClick });
+    }
 
     return _react2['default'].createElement(
       'div',
@@ -39084,17 +39224,16 @@ var Slide = _react2['default'].createClass({
       ),
       _react2['default'].createElement(
         'div',
-        { className: 'question top30' },
+        { className: 'question top20' },
         _react2['default'].createElement(
-          'button',
-          { className: 'btn btn-primary pull-right' },
-          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-plus' }),
-          ' Add question'
-        ),
-        _react2['default'].createElement(
-          'h2',
-          null,
-          'Questions'
+          'div',
+          { className: 'clearfix' },
+          _react2['default'].createElement(
+            'h2',
+            null,
+            'Questions'
+          ),
+          questionForm
         ),
         _react2['default'].createElement(_questionsQuestionList2['default'], { questions: questions })
       )
@@ -39104,7 +39243,7 @@ var Slide = _react2['default'].createClass({
 
 module.exports = Slide;
 
-},{"../questions/QuestionList":238,"lodash":247,"react":228,"rx-react":229}],243:[function(require,module,exports){
+},{"../questions/QuestionForm":238,"../questions/QuestionList":239,"lodash":248,"react":228,"rx-react":229}],244:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -39175,7 +39314,7 @@ var SlideList = (function (_React$Component) {
 
 module.exports = SlideList;
 
-},{"./SlideTeaser":244,"lodash":247,"react":228}],244:[function(require,module,exports){
+},{"./SlideTeaser":245,"lodash":248,"react":228}],245:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -39246,7 +39385,7 @@ var SlideTeaser = (function (_React$Component) {
 
 module.exports = SlideTeaser;
 
-},{"react":228,"rx-react":229}],245:[function(require,module,exports){
+},{"react":228,"rx-react":229}],246:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39301,7 +39440,7 @@ var Slides = _react2['default'].createClass({
     var _this = this;
 
     var elements = [];
-    _lodash2['default'].forEach(this.state.slide_groups, function (group) {
+    _lodash2['default'].forEach(this.state.slide_groups, function (group, key) {
       elements.push(_react2['default'].createElement(
         'div',
         { className: 'container' },
@@ -39310,7 +39449,7 @@ var Slides = _react2['default'].createClass({
           null,
           group.topic
         ),
-        _react2['default'].createElement(_SlideList2['default'], { slides: group.slides, onSetSlide: _this.props.onSetSlide, parent: 'slides' })
+        _react2['default'].createElement(_SlideList2['default'], { key: key, slides: group.slides, onSetSlide: _this.props.onSetSlide, parent: 'slides' })
       ));
     });
     return _react2['default'].createElement(
@@ -39323,7 +39462,7 @@ var Slides = _react2['default'].createClass({
 
 module.exports = Slides;
 
-},{"./SlideList":243,"lodash":247,"react":228}],246:[function(require,module,exports){
+},{"./SlideList":244,"lodash":248,"react":228}],247:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -39391,7 +39530,7 @@ var SearchApp = _react2['default'].createClass({
 
 _react2['default'].render(_react2['default'].createElement(SearchApp, null), $('#app').get(0));
 
-},{"./components/search/Search":240,"./components/slides/Slide":242,"./components/slides/Slides":245,"react":228}],247:[function(require,module,exports){
+},{"./components/search/Search":241,"./components/slides/Slide":243,"./components/slides/Slides":246,"react":228}],248:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -51630,4 +51769,4 @@ _react2['default'].render(_react2['default'].createElement(SearchApp, null), $('
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[246]);
+},{}]},{},[247]);

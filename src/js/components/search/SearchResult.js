@@ -17,7 +17,7 @@ class SearchResult extends React.Component {
       <div className={classes}>
         <TabbedArea defaultActiveKey={1}>
           <TabPane eventKey={1} tab='Questions'>
-            <QuestionList questions={this.props.questions}/>
+            <QuestionList questions={this.props.questions} showForm={false}/>
           </TabPane>
           <TabPane eventKey={2} tab='Slides'>
             <SlideList slides={this.props.slides}

@@ -44,7 +44,8 @@ var AnswerForm = React.createClass({
         </div>
         <div className="col-sm-10 top20">
           <textarea className="form-control" rows="3"
-                    onChange={this.handlers.answerChanged}></textarea>
+                    onChange={this.handlers.answerChanged}
+                    placeholder="Enter your answer..."></textarea>
           <button type="submit" className="btn btn-primary top15"
                   onClick={this.handlers.answerSubmit}>Submit
           </button>
