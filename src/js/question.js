@@ -3,14 +3,13 @@ import _ from 'lodash';
 import Rx from 'rx-react';
 
 import Slide from './components/slides/Slide';
-import url from './utils/url'
+import url from './utils/url';
 
 var SlideApp = React.createClass({
   getInitialState: function () {
     return {
       questions: [],
-      slides: [],
-      slide: null
+      question: null,
     };
   },
   componentWillMount: function () {
@@ -35,9 +34,9 @@ var SlideApp = React.createClass({
   },
   changeSlide: function(options) {
     if (options.slide >= 0 && options.slide < this.state.slides.length) {
-      url.set('slide.html', {
-        slide: options.slide
-      });
+      url.set('slide.html', [
+        {slide: options.slide}
+      ]);
     }
   },
   render: function () {

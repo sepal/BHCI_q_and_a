@@ -31201,8 +31201,7 @@ var SlideApp = _react2['default'].createClass({
   getInitialState: function getInitialState() {
     return {
       questions: [],
-      slides: [],
-      slide: null
+      question: null
     };
   },
   componentWillMount: function componentWillMount() {
@@ -31229,9 +31228,7 @@ var SlideApp = _react2['default'].createClass({
   },
   changeSlide: function changeSlide(options) {
     if (options.slide >= 0 && options.slide < this.state.slides.length) {
-      _utilsUrl2['default'].set('slide.html', {
-        slide: options.slide
-      });
+      _utilsUrl2['default'].set('slide.html', [{ slide: options.slide }]);
     }
   },
   render: function render() {
