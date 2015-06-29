@@ -31142,7 +31142,7 @@ var SlideTeaser = (function (_React$Component) {
       var url = 'slide.html?slide=' + this.props.id;
       return _react2['default'].createElement(
         'div',
-        { className: 'slide slide--teaser col-md-4 top17',
+        { className: 'slide slide--teaser col-sm-4 col-xs-6 top17',
           onClick: this.handlers.slideClick,
           'data-slide': this.props.id },
         _react2['default'].createElement(

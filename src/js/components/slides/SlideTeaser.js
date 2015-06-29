@@ -22,7 +22,7 @@ class SlideTeaser extends React.Component {
     var img_path = `data/slides/thumb/${this.props.filename}`;
     var url = `slide.html?slide=${this.props.id}`;
     return (
-      <div className="slide slide--teaser col-md-4 top17"
+      <div className="slide slide--teaser col-sm-4 col-xs-6 top17"
            onClick={this.handlers.slideClick}
            data-slide={this.props.id}>
         <a href={url}>

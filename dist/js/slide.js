@@ -31384,16 +31384,16 @@ var Slide = _react2['default'].createClass({
         { className: 'slide__show container' },
         _react2['default'].createElement(
           'a',
-          { href: 'javascript:void(0)', className: 'col-md-1 slide__controller',
+          { href: 'javascript:void(0)', className: 'col-xs-1 slide__controller',
             onClick: this.handlers.prevClick },
           _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-left',
             'aria-hidden': 'true' })
         ),
-        _react2['default'].createElement('img', { src: img_path, className: 'col-md-10' }),
+        _react2['default'].createElement('img', { src: img_path, className: 'col-xs-10' }),
         _react2['default'].createElement(
           'a',
           { href: 'javascript:void(0)',
-            className: 'col-md-1 text-right slide__controller',
+            className: 'col-xs-1 text-right slide__controller',
             onClick: this.handlers.nextClick },
           _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-right',
             'aria-hidden': 'true' })

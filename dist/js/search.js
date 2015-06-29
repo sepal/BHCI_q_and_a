@@ -38958,8 +38958,9 @@ var QuestionTeaser = (function (_React$Component) {
         body: this.props.body,
         topic: this.props.topic
       });
+      console.log(this.props);
 
-      if (this.props.id) link = 'question.html?question=' + this.props.id;
+      if (this.props.id != undefined) link = 'question.html?question=' + this.props.id;
 
       return _react2['default'].createElement(
         'div',
@@ -39314,16 +39315,16 @@ var Slide = _react2['default'].createClass({
         { className: 'slide__show container' },
         _react2['default'].createElement(
           'a',
-          { href: 'javascript:void(0)', className: 'col-md-1 slide__controller',
+          { href: 'javascript:void(0)', className: 'col-xs-1 slide__controller',
             onClick: this.handlers.prevClick },
           _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-left',
             'aria-hidden': 'true' })
         ),
-        _react2['default'].createElement('img', { src: img_path, className: 'col-md-10' }),
+        _react2['default'].createElement('img', { src: img_path, className: 'col-xs-10' }),
         _react2['default'].createElement(
           'a',
           { href: 'javascript:void(0)',
-            className: 'col-md-1 text-right slide__controller',
+            className: 'col-xs-1 text-right slide__controller',
             onClick: this.handlers.nextClick },
           _react2['default'].createElement('span', { className: 'glyphicon glyphicon-menu-right',
             'aria-hidden': 'true' })
@@ -39475,7 +39476,7 @@ var SlideTeaser = (function (_React$Component) {
       var url = 'slide.html?slide=' + this.props.id;
       return _react2['default'].createElement(
         'div',
-        { className: 'slide slide--teaser col-md-4 top17',
+        { className: 'slide slide--teaser col-sm-4 col-xs-6 top17',
           onClick: this.handlers.slideClick,
           'data-slide': this.props.id },
         _react2['default'].createElement(
@@ -39654,7 +39655,7 @@ exports.set = function (page, parameters) {
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }
-  params.join("&");
+  params = params.join("&");
   window.location = page + "?" + params;
 };
 
@@ -39664,7 +39665,9 @@ exports.create = function (page, parameters) {
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }
-  params.join("&");
+  console.log(params);
+  params = params.join("&");
+  console.log(params);
 
   return page + "?" + params;
 };

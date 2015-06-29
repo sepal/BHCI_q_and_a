@@ -86,14 +86,14 @@ var Slide = React.createClass({
         <h1>{this.props.topic}</h1>
 
         <div className="slide__show container">
-          <a href="javascript:void(0)" className="col-md-1 slide__controller"
+          <a href="javascript:void(0)" className="col-xs-1 slide__controller"
              onClick={this.handlers.prevClick}>
             <span className="glyphicon glyphicon-menu-left"
                   aria-hidden="true"></span>
           </a>
-          <img src={img_path} className="col-md-10"/>
+          <img src={img_path} className="col-xs-10"/>
           <a href="javascript:void(0)"
-             className="col-md-1 text-right slide__controller"
+             className="col-xs-1 text-right slide__controller"
              onClick={this.handlers.nextClick}>
             <span className="glyphicon glyphicon-menu-right"
                   aria-hidden="true"></span>
