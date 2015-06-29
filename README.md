@@ -9,9 +9,10 @@ BabelJS for transpiling [ES6](https://babeljs.io/) to ES5.
 
 ## Running 
 
-All files required to run the app have been comitted to this repository. To 
-start the app just
-open the index.html file.
+To run the app you'll need to install the basic dependencies using 
+[nodejs](https://nodejs.org/)/[npm](https://www.npmjs.com/). After installing
+NodeJS just run `npm install --production`, which will download jQuery and 
+bootstrap-sass to the node_modules folder.
 
 ## Developing
 
