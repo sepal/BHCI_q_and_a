@@ -31193,58 +31193,70 @@ var QuestionList = (function (_React$Component) {
 module.exports = QuestionList;
 
 },{"./QuestionTeaser":170,"lodash":174,"react":158}],170:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _utilsUrl = require('../../utils/url');
+
+var _utilsUrl2 = _interopRequireDefault(_utilsUrl);
 
 var QuestionTeaser = (function (_React$Component) {
   function QuestionTeaser() {
     _classCallCheck(this, QuestionTeaser);
 
-    _get(Object.getPrototypeOf(QuestionTeaser.prototype), "constructor", this).apply(this, arguments);
+    _get(Object.getPrototypeOf(QuestionTeaser.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _inherits(QuestionTeaser, _React$Component);
 
   _createClass(QuestionTeaser, [{
-    key: "render",
+    key: 'render',
     value: function render() {
-      var url = "question.html?question=" + this.props.id;
-      return _react2["default"].createElement(
-        "div",
-        { className: "question question--teaser" },
-        _react2["default"].createElement(
-          "a",
-          { href: url },
-          _react2["default"].createElement(
-            "div",
-            { className: "question__title col-md-8" },
-            _react2["default"].createElement(
-              "h3",
+      var link = _utilsUrl2['default'].create('question.html', {
+        title: this.props.title,
+        body: this.props.body,
+        topic: this.props.topic
+      });
+      console.log(this.props);
+
+      if (this.props.id != undefined) link = 'question.html?question=' + this.props.id;
+
+      return _react2['default'].createElement(
+        'div',
+        { className: 'question question--teaser' },
+        _react2['default'].createElement(
+          'a',
+          { href: link },
+          _react2['default'].createElement(
+            'div',
+            { className: 'question__title col-md-8' },
+            _react2['default'].createElement(
+              'h3',
               null,
               this.props.title
             )
           ),
-          _react2["default"].createElement(
-            "div",
-            { className: "question__stats col-md-4 top15" },
-            _react2["default"].createElement(
-              "h5",
+          _react2['default'].createElement(
+            'div',
+            { className: 'question__stats col-md-4 top15' },
+            _react2['default'].createElement(
+              'h5',
               null,
               this.props.answers.length,
-              " answers"
+              ' answers'
             )
           )
         )
@@ -31253,13 +31265,13 @@ var QuestionTeaser = (function (_React$Component) {
   }]);
 
   return QuestionTeaser;
-})(_react2["default"].Component);
+})(_react2['default'].Component);
 
 ;
 
 module.exports = QuestionTeaser;
 
-},{"react":158}],171:[function(require,module,exports){
+},{"../../utils/url":173,"react":158}],171:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -31471,7 +31483,6 @@ var SlideApp = _react2['default'].createClass({
   },
   addQuestion: function addQuestion(question) {
     var questions = this.state.questions;
-    question['id'] = this.state.questions.length;
     question['author'] = 'you';
     question['answers'] = [];
 
@@ -31520,8 +31531,21 @@ exports.set = function (page, parameters) {
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }
-  params.join("&");
+  params = params.join("&");
   window.location = page + "?" + params;
+};
+
+exports.create = function (page, parameters) {
+  var params = [];
+
+  for (var i in parameters) {
+    params.push(i + "=" + parameters[i]);
+  }
+  console.log(params);
+  params = params.join("&");
+  console.log(params);
+
+  return page + "?" + params;
 };
 
 },{}],174:[function(require,module,exports){

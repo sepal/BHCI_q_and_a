@@ -34,7 +34,6 @@ var SlideApp = React.createClass({
   },
   addQuestion: function (question) {
     var questions = this.state.questions;
-    question['id'] = this.state.questions.length;
     question['author'] = 'you';
     question['answers'] = [];
 

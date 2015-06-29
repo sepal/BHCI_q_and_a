@@ -31339,10 +31339,22 @@ var SlideApp = _react2['default'].createClass({
   },
   componentWillMount: function componentWillMount() {
     var parameters = _utilsUrl2['default'].getParams();
+    var question = null;
+    if (parameters.question) {
+      question = _dataQuestions2['default'][parameters.question];
+    } else if (parameters.title && parameters.body && parameters.topic) {
+      question = {
+        title: parameters.title,
+        body: parameters.body,
+        topic: parameters.topic,
+        author: 'You',
+        answers: []
+      };
+    }
 
     this.setState({
       questions: _dataQuestions2['default'],
-      question: _dataQuestions2['default'][parameters.question]
+      question: question
     });
   },
   voteUp: function voteUp(options) {
@@ -31387,7 +31399,9 @@ var SlideApp = _react2['default'].createClass({
   },
   addAnswer: function addAnswer(answer) {
     if (answer.body != '') {
-      var question = this.state.questions[answer.question_id];
+      var question = null;
+      if (answer.question_id != undefined) question = this.state.questions[answer.question_id];else question = this.state.question;
+
       var _questions3 = this.state.questions;
 
       answer['author'] = 'You';
@@ -31396,7 +31410,7 @@ var SlideApp = _react2['default'].createClass({
 
       question.answers.push(answer);
 
-      _questions3[question.id] = question;
+      if (answer.question_id != undefined) _questions3[question.id] = question;
 
       this.setState({
         question: question,
@@ -31455,8 +31469,21 @@ exports.set = function (page, parameters) {
   for (var i in parameters) {
     params.push(i + "=" + parameters[i]);
   }
-  params.join("&");
+  params = params.join("&");
   window.location = page + "?" + params;
+};
+
+exports.create = function (page, parameters) {
+  var params = [];
+
+  for (var i in parameters) {
+    params.push(i + "=" + parameters[i]);
+  }
+  console.log(params);
+  params = params.join("&");
+  console.log(params);
+
+  return page + "?" + params;
 };
 
 },{}],174:[function(require,module,exports){

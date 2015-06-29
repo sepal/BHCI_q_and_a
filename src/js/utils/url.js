@@ -19,6 +19,19 @@ exports.set = function(page, parameters) {
   for (let i in parameters) {
     params.push(`${i}=${parameters[i]}`);
   }
-  params.join('&');
+  params = params.join('&');
   window.location = `${page}?${params}`;
+};
+
+exports.create = function(page, parameters) {
+  let params = [];
+
+  for (let i in parameters) {
+    params.push(`${i}=${parameters[i]}`);
+  }
+  console.log(params);
+  params = params.join('&');
+  console.log(params);
+
+  return `${page}?${params}`;
 };

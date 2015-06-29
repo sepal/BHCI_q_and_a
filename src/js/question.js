@@ -17,10 +17,22 @@ var SlideApp = React.createClass({
   },
   componentWillMount: function () {
     let parameters = url.getParams();
+    let question = null;
+    if (parameters.question) {
+      question = questions[parameters.question]
+    } else if (parameters.title && parameters.body && parameters.topic) {
+      question = {
+        title: parameters.title,
+        body: parameters.body,
+        topic: parameters.topic,
+        author: "You",
+        answers: []
+      };
+    }
 
     this.setState({
       questions: questions,
-      question: questions[parameters.question]
+      question: question
     });
   },
   voteUp: function (options) {
@@ -66,7 +78,12 @@ var SlideApp = React.createClass({
   },
   addAnswer: function (answer) {
     if (answer.body != "") {
-      let question = this.state.questions[answer.question_id];
+      let question = null
+      if (answer.question_id != undefined)
+        question = this.state.questions[answer.question_id];
+      else
+        question = this.state.question;
+
       let questions = this.state.questions;
 
       answer['author'] = 'You';
@@ -75,7 +92,8 @@ var SlideApp = React.createClass({
 
       question.answers.push(answer);
 
-      questions[question.id] = question;
+      if (answer.question_id != undefined)
+        questions[question.id] = question;
 
       this.setState({
         question: question,
