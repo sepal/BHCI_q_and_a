@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     "id": 0,
     "topic": "intro into hci",
@@ -35,4 +35,4 @@
     "filename": "vo20150310_9.jpg",
     "body": "design q&a with charles eames\nmoggride (2006). designing interactions.\n\nq. What is your definition of Design?\na. A plan for arranging elements in such a way as to best accomplish a particular purpose.\n\nq. Is design an expression of art (an art form)?\na. The design is an expression of the purpose. It may (if it is good enough) later be judged as art.\n\nq. Is design a craft for industrial purposes?\na. No-but design may be a solution to some industrial problems.\n\nq. What are the boundaries of design?\na. What are the boundaries of problems?\n\nq. does the creation of design admit constraint?\na. Design depends largely on constraints.\n\nq. What constraints?\na. The sum of all constraints. Here is one of the few effective keys to design problem-the ability of the design to recognize as many of the constraints as possible-his willingness and enthusiasm for working within these constraints-the constraints of price, of size, of strength, balance, of surface, of time etc.; each problem has its own peculiar list."
   }
-]
+];

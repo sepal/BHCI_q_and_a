@@ -3,6 +3,9 @@ import Search from './components/search/Search';
 import Slides from './components/slides/Slides';
 import Slide from './components/slides/Slide';
 
+import questions from '../../data/questions';
+import slides from '../../data/slides';
+
 var SearchApp = React.createClass({
   getInitialState: function () {
     return {
@@ -11,20 +14,9 @@ var SearchApp = React.createClass({
     }
   },
   componentWillMount: function () {
-    $.ajax({
-      url: "data/questions.json"
-    }).done((data) => {
-      this.setState({
-        questions: data
-      });
-    });
-
-    $.ajax({
-      url: "data/slides.json"
-    }).done((data) => {
-      this.setState({
-        slides: data
-      });
+    this.setState({
+      questions: questions,
+      slides: slides
     });
   },
   render: function () {

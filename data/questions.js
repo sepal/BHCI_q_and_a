@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     "id": 0,
     "topic": "intro into hci",
@@ -59,4 +59,4 @@
       }
     ]
   }
-]
+];

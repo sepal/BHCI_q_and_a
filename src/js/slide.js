@@ -5,6 +5,9 @@ import Rx from 'rx-react';
 import Slide from './components/slides/Slide';
 import url from './utils/url'
 
+import questions from '../../data/questions';
+import slides from '../../data/slides';
+
 var SlideApp = React.createClass({
   getInitialState: function () {
     return {
@@ -16,21 +19,10 @@ var SlideApp = React.createClass({
   componentWillMount: function () {
     let parameters = url.getParams();
 
-    $.ajax({
-      url: "data/questions.json"
-    }).done((data) => {
-      this.setState({
-        questions: data
-      });
-    });
-
-    $.ajax({
-      url: "data/slides.json"
-    }).done((data) => {
-      this.setState({
-        slides: data,
-        slide: data[parameters['slide']]
-      });
+    this.setState({
+      questions: questions,
+      slides: slides,
+      slide: slides[parameters['slide']]
     });
   },
   changeSlide: function (options) {

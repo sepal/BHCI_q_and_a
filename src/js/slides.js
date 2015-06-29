@@ -1,6 +1,9 @@
 import React from 'react';
 import Slides from './components/slides/Slides.js';
 
+import questions from '../../data/questions';
+import slides from '../../data/slides';
+
 var SlidesApp = React.createClass({
   getInitialState: function () {
     return {
@@ -8,12 +11,8 @@ var SlidesApp = React.createClass({
     };
   },
   componentWillMount: function () {
-    $.ajax({
-      url: "data/slides.json"
-    }).done((data) => {
-      this.setState({
-        slides: data
-      });
+    this.setState({
+      slides: slides
     });
   },
   render: function() {

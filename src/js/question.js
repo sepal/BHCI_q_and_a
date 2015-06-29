@@ -5,6 +5,8 @@ import Rx from 'rx-react';
 import Question from './components/questions/Question';
 import url from './utils/url';
 
+import questions from '../../data/questions';
+
 var SlideApp = React.createClass({
   getInitialState: function () {
     return {
@@ -16,13 +18,9 @@ var SlideApp = React.createClass({
   componentWillMount: function () {
     let parameters = url.getParams();
 
-    $.ajax({
-      url: "data/questions.json"
-    }).done((data) => {
-      this.setState({
-        questions: data,
-        question: data[parameters.question]
-      });
+    this.setState({
+      questions: questions,
+      question: questions[parameters.question]
     });
   },
   voteUp: function (options) {
